@@ -8,14 +8,13 @@ stages:
 
 pre-commit:
   stage: build
-  allow_failure: true
   image:
     # https://hub.docker.com/_/alpine
     name: alpine:latest
   script:
     - date
     # install necessary packages:
-    - apk add --no-cache py3-pip git npm bash cargo
+    - apk add --no-cache bash git npm py3-pip python3-dev
     - pip3 install pre-commit
     - pre-commit --version
     - pre-commit run --all-files
@@ -29,7 +28,7 @@ build_pages:
     - date
     - apt-get update
     # get and install necessary packages:
-    - $APT_GET_INSTALL python3-sphinx latexmk make texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended rsync
+    - $APT_GET_INSTALL latexmk make python3-sphinx rsync texlive-fonts-recommended texlive-latex-extra texlive-latex-recommended
     # build
     - ./create_doc
     # create data for pages:

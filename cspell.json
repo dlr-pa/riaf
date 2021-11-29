@@ -14,5 +14,14 @@
 	"quickstart", "toctree", "maxdepth", "genindex"
     ],
     // ignorePaths: a list of globs to specify which files are to be ignored.
-    "ignorePaths": ["Makefile", "source/conf.py", "LICENSE.txt"]
+    "ignorePaths": [
+	"create_doc_html",
+	"create_doc_pdf",
+	"cspell.json",
+	".gitlab-ci.yml",
+	"LICENSE.txt",
+	"Makefile",
+	".pre-commit-config.yaml",
+	".rstcheck.cfg",
+	"source/conf.py"]
 }
