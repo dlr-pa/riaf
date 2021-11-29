@@ -4,7 +4,7 @@ riaf -- a Repository Infrastructure that Accommodates Files
 riaf is a repository infrastructure to accommodate files.
 It enables to hold the data with the [FAIR]_ principles.
 
-The primary focus is to work as an inhouse solution to handle digital assets.
+The primary focus is to work as an in-house solution to handle digital assets.
 It should be possible to use the data without download a complete digital asset.
 
 For this purpose we use open source software in a composability design
