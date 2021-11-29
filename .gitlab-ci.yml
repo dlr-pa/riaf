@@ -33,6 +33,7 @@ build_pages:
     - ./create_doc
     # create data for pages:
     - mv riaf.html public
+    - mv riaf.pdf public/
     # create badges, which could be used in gitlab:
     - $APT_GET_INSTALL python3-pip
     # see https://github.com/jongracecox/anybadge for available colors
@@ -46,7 +47,6 @@ build_pages:
       - document_pdf.svg
       - pages.svg
       - public
-      - riaf.pdf
 
 pages:
   stage: deploy
@@ -65,4 +65,3 @@ pages:
       - document_pdf.svg
       - pages.svg
       - public
-      - riaf.pdf
