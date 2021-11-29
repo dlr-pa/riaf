@@ -38,4 +38,3 @@ For this purpose we use open source software in a composability design
 .. [git-annex] https://git-annex.branchable.com
 .. [OpenSSH] https://www.openssh.com/
 .. [apache] https://httpd.apache.org/
-

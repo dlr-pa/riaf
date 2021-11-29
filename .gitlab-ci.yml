@@ -1,0 +1,67 @@
+variables:
+  DEBIAN_FRONTEND: noninteractive
+  APT_GET_INSTALL: "apt-get install --no-install-recommends -q -y"
+
+stages:
+  - build
+  - deploy
+
+pre-commit:
+  stage: build
+  allow_failure: true
+  image:
+    # https://hub.docker.com/_/alpine
+    name: alpine:latest
+  script:
+    - date
+    # install necessary packages:
+    - apk add --no-cache py3-pip git npm bash cargo
+    - pip3 install pre-commit
+    - pre-commit --version
+    - pre-commit run --all-files
+
+build_pages:
+  stage: build
+  image:
+    # https://hub.docker.com/_/debian
+    name: debian:latest
+  script:
+    - date
+    - apt-get update
+    # get and install necessary packages:
+    - $APT_GET_INSTALL python3-sphinx latexmk make texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended rsync
+    # build
+    - ./create_doc
+    # create data for pages:
+    - mv riaf.html public
+    # create badges, which could be used in gitlab:
+    - $APT_GET_INSTALL python3-pip
+    # see https://github.com/jongracecox/anybadge for available colors
+    - pip3 install anybadge
+    - anybadge -l "document as" -v html -f pages.svg -c fuchsia -o
+    - anybadge -l "document as" -v pdf -f document_pdf.svg -c orange -o
+  # store data as artifacts (e. g. used by pages):
+  artifacts:
+    expire_in: 1 hrs
+    paths:
+      - public
+      - pages.svg
+      - document_pdf.svg
+
+pages:
+  stage: deploy
+  image:
+    # https://hub.docker.com/_/alpine
+    name: alpine:latest
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  dependencies:
+    - build_pages
+  script:
+    - date
+  # store data as artifacts (e. g. used by pages):
+  artifacts:
+    paths:
+      - public
+      - pages.svg
+      - document_pdf.svg

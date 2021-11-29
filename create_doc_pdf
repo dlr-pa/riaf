@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+set -e
+
+make latexpdf && make latexpdf && cp -p build/latex/riaf.pdf riaf.pdf || exit $?

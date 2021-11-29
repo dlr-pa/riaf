@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+set -e
+d="riaf.html"
+if [ ! -d $d ]; then
+    mkdir $d
+fi
+
+make html || exit $?
+
+rsp="--archive --one-file-system --links --hard-links --sparse --checksum"
+bhp="build/html"
+# shellcheck disable=SC2086
+rsync --delete-after $rsp $bhp/ $d/
+cp -p LICENSE.txt $d/
