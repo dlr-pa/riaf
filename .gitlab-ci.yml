@@ -44,9 +44,10 @@ build_pages:
   artifacts:
     expire_in: 1 hrs
     paths:
-      - public
-      - pages.svg
       - document_pdf.svg
+      - pages.svg
+      - public
+      - riaf.pdf
 
 pages:
   stage: deploy
@@ -62,6 +63,7 @@ pages:
   # store data as artifacts (e. g. used by pages):
   artifacts:
     paths:
-      - public
-      - pages.svg
       - document_pdf.svg
+      - pages.svg
+      - public
+      - riaf.pdf
