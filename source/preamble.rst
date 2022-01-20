@@ -7,7 +7,8 @@ It enables to hold the data with the [FAIR]_ principles.
 riaf is designed to enable provenance and reproducibility of the research data
 in the early part of the data life cycle, i. e. prior to publication.
 It further is designed to enable checks on metadata relevant to research data
-management as defined e.g. in a machine actional data management plan (maDMP).
+management as defined e.g. in a
+machine actionable data management plan (maDMP).
 
 The primary focus is to work as an in-house solution to handle digital assets.
 It should be possible to use the data without downloading a complete digital
