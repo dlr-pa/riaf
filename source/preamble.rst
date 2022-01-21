@@ -39,7 +39,7 @@ For this purpose we use open source software in a composability design
 .. [fuse_git_bare_fs] https://dlr-pa.github.io/fuse_git_bare_fs/
 .. [sskm] https://gitolite.com/gitolite/contrib/sskm
 .. [gitolite_web_interface] https://github.com/dlr-pa/gitolite_web_interface
-.. [pydabu] https://dlr-pa.github.io/pydabu/
+.. [pydabu] https://dlr-pa.gitlab.io/pydabu/
 .. [git] https://git-scm.com/
 .. [WebDAV] http://www.webdav.org/
 .. [git-annex] https://git-annex.branchable.com
