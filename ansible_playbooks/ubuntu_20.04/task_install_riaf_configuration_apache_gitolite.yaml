@@ -1,0 +1,47 @@
+# https://docs.ansible.com/ansible/2.5/modules/shell_module.html
+# https://docs.ansible.com/ansible/2.5/modules/lineinfile_module.html
+# https://docs.ansible.com/ansible/2.5/modules/copy_module.html
+
+- name: add fuse mount in /etc/fstab
+  lineinfile:
+    backup: yes
+    path: /etc/fstab
+    regexp: "{{ gitolite_home }}/repositories /var/www/gitolite/dav fuse.fuse_git_bare_fs uid={{ gitolite_user }},gid={{ gitolite_user }},tree,allow_other,get_user_list_from_gitolite,provide_htaccess,root_object=master,gitolite_user_file={{ gitolite_home }}/dav_users,file_st_modes=33184=33256=41471=16872,default_permissions,nofail,ro 0 0"
+    line: "{{ gitolite_home }}/repositories /var/www/gitolite/dav fuse.fuse_git_bare_fs uid={{ gitolite_user }},gid={{ gitolite_user }},tree,allow_other,get_user_list_from_gitolite,provide_htaccess,root_object=master,gitolite_user_file={{ gitolite_home }}/dav_users,file_st_modes=33184=33256=41471=16872,default_permissions,nofail,ro 0 0"
+- name: create server directory /var/www/bin
+  file:
+    group: "{{ gitolite_user }}"
+    mode: 0755
+    owner: "{{ gitolite_user }}"
+    path: /var/www/bin
+    state: directory
+- name: 'install gitolite-suexec-wrapper.sh'
+  copy:
+    backup: yes
+    dest: /var/www/bin/gitolite-suexec-wrapper.sh
+    group: "{{ gitolite_user }}"
+    mode: 0700
+    owner: "{{ gitolite_user }}"
+    src: '{{ gitolite_suexec_wrapper }}'
+  notify:
+    - reload apache2
+- name: 'adapt gitolite-suexec-wrapper.sh'
+  replace:
+    backup: yes
+    path: /var/www/bin/gitolite-suexec-wrapper.sh
+    regexp: "/var/lib/gitolite"
+    replace: "{{ gitolite_home }}"
+- name: 'install index.html'
+  copy:
+    backup: yes
+    dest: /var/www/gitolite/index.html
+    group: "{{ gitolite_user }}"
+    mode: 0644
+    owner: "{{ gitolite_user }}"
+    src: '{{ index_html }}'
+  notify:
+    - reload apache2
+- name: restart apache2
+  service:
+    name: apache2
+    state: restarted

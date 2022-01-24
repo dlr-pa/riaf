@@ -1,0 +1,7 @@
+- name: install zfsutils-linux
+  apt:
+    name: zfsutils-linux
+    state: present
+    force_apt_get: yes
+- name: create zfs pool data
+  shell: zfs get all data || zpool create data /dev/sda5

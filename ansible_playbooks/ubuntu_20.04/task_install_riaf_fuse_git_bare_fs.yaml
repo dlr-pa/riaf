@@ -1,0 +1,14 @@
+# https://docs.ansible.com/ansible/2.5/modules/pip_module.html
+# https://docs.ansible.com/ansible/2.5/modules/replace_module.html
+
+# install and configure fuse_git_bare_fs
+- name: install fuse_git_bare_fs
+  pip:
+    name: https://github.com/dlr-pa/fuse_git_bare_fs/archive/refs/heads/master.zip
+
+- name: adapt fuse to allow non-root users to specify the allow_other option
+  replace:
+    backup: yes
+    path: /etc/fuse.conf
+    regexp: '^#user_allow_other'
+    replace: 'user_allow_other'

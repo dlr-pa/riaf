@@ -1,0 +1,9 @@
+# configuration of sshd
+- name: unset AcceptEnv in /etc/ssh/sshd_config
+  replace:
+    backup: yes
+    path: /etc/ssh/sshd_config
+    regexp: '^AcceptEnv LANG LC_*'
+    replace: '#AcceptEnv LANG LC_*'
+  notify:
+    - reload ssh

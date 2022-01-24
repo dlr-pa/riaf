@@ -1,0 +1,37 @@
+# enable apache modules
+- name: enable necessary apache module ssl
+  apache2_module:
+    name: ssl
+    state: present
+  notify:
+    - restart apache2
+- name: enable necessary apache module headers
+  apache2_module:
+    name: headers
+    state: present
+  notify:
+    - restart apache2
+- name: enable necessary apache module cgid
+  apache2_module:
+    name: cgid
+    state: present
+  notify:
+    - restart apache2
+- name: enable necessary apache module suexec
+  apache2_module:
+    name: suexec
+    state: present
+  notify:
+    - restart apache2
+- name: enable necessary apache module dav
+  apache2_module:
+    name: dav
+    state: present
+  notify:
+    - restart apache2
+- name: enable necessary apache module dav_fs
+  apache2_module:
+    name: dav_fs
+    state: present
+  notify:
+    - restart apache2

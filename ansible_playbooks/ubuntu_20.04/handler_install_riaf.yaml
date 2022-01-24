@@ -1,0 +1,14 @@
+# https://docs.ansible.com/ansible/2.5/modules/service_module.html
+
+- name: reload ssh
+  service:
+    name: ssh
+    state: reloaded
+- name: restart apache2
+  service:
+    name: apache2
+    state: restarted
+- name: reload apache2
+  service:
+    name: apache2
+    state: reloaded

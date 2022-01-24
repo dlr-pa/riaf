@@ -1,0 +1,24 @@
+- name: move gitolite home to other
+  shell: mv /data/gitolite /data/gitolite.bak
+- name: create zfs filesystem data/gitolite
+  shell: zfs create -o compression=on data/gitolite
+- name: set rights (chown)
+  shell: chown -R --reference=/data/gitolite.bak /data/gitolite
+- name: set rights (chmod)
+  shell: chmod --reference=/data/gitolite.bak /data/gitolite
+- name: rsync
+  shell: rsync --archive --one-file-system --links --hard-links --sparse /data/gitolite.bak/ /data/gitolite/
+- name: rm
+  shell: rm -rf /data/gitolite.bak
+- name: move gitolite home to other
+  shell: mv /data/gitolite/repositories /data/gitolite.bak
+- name: create zfs filesystem data/gitolite
+  shell: zfs create -o compression=on data/gitolite/repositories
+- name: set rights (chown)
+  shell: chown -R --reference=/data/gitolite.bak /data/gitolite/repositories
+- name: set rights (chmod)
+  shell: chmod --reference=/data/gitolite.bak /data/gitolite/repositories
+- name: rsync
+  shell: rsync --archive --one-file-system --links --hard-links --sparse /data/gitolite.bak/ /data/gitolite/repositories/
+- name: rm
+  shell: rm -rf /data/gitolite.bak

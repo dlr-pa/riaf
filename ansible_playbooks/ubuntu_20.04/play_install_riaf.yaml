@@ -1,0 +1,52 @@
+---
+# ansible-playbook --ask-vault-pass -v play_install_riaf.yaml
+
+- name: installation and basic configuration
+  become: yes
+  vars_prompt:
+    - name: ssh_adminkey_gitolite
+      prompt: "initial ssh adminkey for gitolite"
+      private: no
+    - name: gitolite_user
+      prompt: "gitolite user name"
+      default: "git"
+      private: no
+    - name: gitolite_home
+      prompt: "path to the gitolite home directory (repositories are stored here)"
+      default: "/data/gitolite"
+      private: no
+    - name: servername
+      prompt: "DNS name of the server"
+      default: "example.com"
+      private: no
+    - name: configfile_gitolite_site
+      prompt: "config file of the gitolite web site"
+      default: "configs/gitolite.conf"
+      private: no
+    - name: ssl_cert_crt
+      prompt: "ssl certificate of the web site"
+      default: "cert/gitolite.crt"
+      private: no
+    - name: ssl_cert_key
+      prompt: "ssl certificate key of the web site"
+      default: "cert/gitolite.key"
+      private: no
+    - name: gitolite_suexec_wrapper
+      prompt: "path to gitolite-suexec-wrapper.sh"
+      default: "configs/gitolite-suexec-wrapper.sh"
+      private: no
+    - name: index_html
+      prompt: "path to index.html"
+      default: "configs/index.html"
+      private: no
+  tasks:
+    - include: task_install_riaf_packages.yaml
+    - include: task_install_riaf_configuration_gitolite.yaml
+    - include: task_install_riaf_configuration_sshd.yaml
+    - include: task_install_riaf_fuse_git_bare_fs.yaml
+    - include: task_install_riaf_enable_apache_modules.yaml
+    - include: task_install_riaf_configuration_apache.yaml
+    - include: task_install_riaf_configuration_apache_gitolite.yaml
+    - include: task_install_riaf.yaml
+  handlers:
+    - include: handler_install_riaf.yaml

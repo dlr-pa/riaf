@@ -1,0 +1,61 @@
+# https://docs.ansible.com/ansible/2.5/modules/copy_module.html
+# https://docs.ansible.com/ansible/2.5/modules/shell_module.html
+
+# adapt apache
+- name: install ssl certificate
+  copy:
+    backup: yes
+    dest: /etc/ssl/certs/gitolite.crt
+    mode: 0644
+    src: '{{ ssl_cert_crt }}'
+  notify:
+    - reload apache2
+- name: install ssl certificate key
+  copy:
+    backup: yes
+    dest: /etc/ssl/private/gitolite.key
+    group: ssl-cert
+    mode: 0640
+    src: '{{ ssl_cert_key }}'
+  notify:
+    - reload apache2
+- name: create server directory /var/www/gitolite
+  file:
+    group: "{{ gitolite_user }}"
+    mode: 0755
+    owner: "{{ gitolite_user }}"
+    path: /var/www/gitolite
+    state: directory
+- name: create server directory /var/www/gitolite/dav
+  file:
+    group: "{{ gitolite_user }}"
+    mode: 0755
+    owner: "{{ gitolite_user }}"
+    path: /var/www/gitolite/dav
+    state: directory
+- name: create /etc/apache2/gitolite.passwd
+  file:
+    path: /etc/apache2/gitolite.passwd
+    state: touch
+- name: install gitolite site
+  copy:
+    backup: yes
+    dest: /etc/apache2/sites-available/gitolite.conf
+    src: '{{ configfile_gitolite_site }}'
+  notify:
+    - reload apache2
+- name: set server name in /etc/apache2/sites-available/gitolite.conf
+  lineinfile:
+    backup: yes
+    insertafter: '^	#Redirect / https://www.example.com/'
+    line: '	Redirect / https://{{ servername }}/'
+    path: /etc/apache2/sites-available/gitolite.conf
+    regexp: '^	Redirect / https://{{ servername }}/'
+- name: disable default site
+  shell: a2dissite 000-default
+  notify:
+    - reload apache2
+- name: enable gitolite web site
+  shell: a2ensite gitolite
+  notify:
+    - reload apache2

@@ -1,0 +1,84 @@
+# https://docs.ansible.com/ansible/2.5/modules/shell_module.html
+# https://docs.ansible.com/ansible/2.5/modules/debconf_module.html
+# https://docs.ansible.com/ansible/2.5/modules/file_module.html
+# https://docs.ansible.com/ansible/2.5/modules/lineinfile_module.html
+# https://docs.ansible.com/ansible/2.5/modules/replace_module.html
+
+# configuration of gitolite
+- name: get configuration options for gitolite3
+  shell: debconf-show gitolite3
+- name: configure gitolite
+  debconf:
+    name: gitolite3
+    question: gitolite3/gituser
+    value: "{{ gitolite_user }}"
+    vtype: string
+- name: configure gitolite
+  debconf:
+    name: gitolite3
+    question: gitolite3/gitdir
+    value: "{{ gitolite_home }}"
+    vtype: string
+- name: configure gitolite
+  debconf:
+    name: gitolite3
+    question: gitolite3/adminkey
+    value: "{{ ssh_adminkey_gitolite }}"
+    vtype: string
+- name: install gitolite configuration
+  shell:
+    DEBIAN_FRONTEND=noninteractive dpkg-reconfigure gitolite3
+- name: adapt rights on gitolite home
+  file:
+    group: "{{ gitolite_user }}"
+    mode: 0750
+    owner: "{{ gitolite_user }}"
+    path: "{{ gitolite_home }}"
+    state: directory
+- name: enable git-annex in gitolite
+  lineinfile:
+    backup: yes
+    insertafter: '# Uncomment or add new commands here.'
+    path: "{{ gitolite_home }}/.gitolite.rc"
+    regexp: "^            'git-annex-shell ua',"
+    line: "            'git-annex-shell ua',"
+- name: enable sskm (self-service key management) in gitolite
+  lineinfile:
+    backup: yes
+    insertafter: '# Uncomment or add new commands here.'
+    path: "{{ gitolite_home }}/.gitolite.rc"
+    regexp: "^            'sskm',"
+    line: "            'sskm',"
+- name: unset daemon
+  replace:
+    backup: yes
+    path: "{{ gitolite_home }}/.gitolite.rc"
+    regexp: "^            'daemon',"
+    replace: "            # 'daemon',"
+- name: unset gitweb
+  replace:
+    backup: yes
+    path: "{{ gitolite_home }}/.gitolite.rc"
+    regexp: "^            'gitweb',"
+    replace: "            # 'gitweb',"
+- name: set Kindergarten
+  replace:
+    backup: yes
+    path: "{{ gitolite_home }}/.gitolite.rc"
+    regexp: "^            # 'Kindergarten',"
+    replace: "            'Kindergarten',"
+- name: create /var/lib/gitolite/gitolite-source
+  file:
+    group: "{{ gitolite_user }}"
+    mode: 0755
+    owner: "{{ gitolite_user }}"
+    path: "{{ gitolite_home }}/gitolite-source"
+    state: directory
+- name: link gitolite source
+  file:
+    group: "{{ gitolite_user }}"
+    mode: 0755
+    owner: "{{ gitolite_user }}"
+    path: "{{ gitolite_home }}/gitolite-source/src"
+    src: /usr/share/gitolite3
+    state: link

@@ -1,0 +1,7 @@
+---
+# ansible-playbook --ask-vault-pass -v play_gitolite_home2zfs_filesystem.yaml
+
+- name: gitolite home -> zfs filesystem
+  become: yes
+  tasks:
+    - include: task_gitolite_home2zfs_filesystem.yaml
