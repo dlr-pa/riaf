@@ -1,7 +1,7 @@
 #!/bin/sh
 
 cat > openssl-fdm.playground.pa.dlr.de.conf <<EOF
-[ req ]   
+[ req ]
 distinguished_name    = req_distinguished_name
 string_mask = nombstr
 req_extensions = v3_req
