@@ -15,6 +15,7 @@
     ],
     // ignorePaths: a list of globs to specify which files are to be ignored.
     "ignorePaths": [
+	"ansible_playbooks/",
 	"create_doc_html",
 	"create_doc_pdf",
 	"cspell.json",
