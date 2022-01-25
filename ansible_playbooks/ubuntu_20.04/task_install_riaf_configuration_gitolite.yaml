@@ -7,19 +7,19 @@
 # configuration of gitolite
 - name: get configuration options for gitolite3
   shell: debconf-show gitolite3
-- name: configure gitolite
+- name: 'configure gitolite: gitolite3/gituser'
   debconf:
     name: gitolite3
     question: gitolite3/gituser
     value: "{{ gitolite_user }}"
     vtype: string
-- name: configure gitolite
+- name: 'configure gitolite: gitolite3/gitdir'
   debconf:
     name: gitolite3
     question: gitolite3/gitdir
     value: "{{ gitolite_home }}"
     vtype: string
-- name: configure gitolite
+- name: 'configure gitolite: gitolite3/adminkey'
   debconf:
     name: gitolite3
     question: gitolite3/adminkey
