@@ -11,7 +11,8 @@
 	"sskm",
         "pydabu",
 	"composability",
-	"quickstart", "toctree", "maxdepth", "genindex"
+	"quickstart", "toctree", "maxdepth", "genindex",
+	"Mohr"
     ],
     // ignorePaths: a list of globs to specify which files are to be ignored.
     "ignorePaths": [
