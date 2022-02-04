@@ -11,7 +11,6 @@ Welcome to riaf's documentation!
    :caption: Contents:
 
    preamble
-   references
 
 
 Indices and tables
