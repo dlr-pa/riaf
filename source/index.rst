@@ -12,6 +12,10 @@ Welcome to riaf's documentation!
 
    preamble
 
+riaf documentation: https://riaf.pages.gitlab.dlr.de/riaf/
+
+source of riaf: https://gitlab.dlr.de/riaf/riaf
+
 
 Indices and tables
 ==================
