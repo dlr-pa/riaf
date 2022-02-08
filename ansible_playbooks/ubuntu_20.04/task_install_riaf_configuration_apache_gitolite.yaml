@@ -1,13 +1,17 @@
 # https://docs.ansible.com/ansible/2.5/modules/shell_module.html
 # https://docs.ansible.com/ansible/2.5/modules/lineinfile_module.html
 # https://docs.ansible.com/ansible/2.5/modules/copy_module.html
+# https://docs.ansible.com/ansible/2.5/modules/mount_module.html
 
 - name: add fuse mount in /etc/fstab
-  lineinfile:
+  mount:
     backup: yes
-    path: /etc/fstab
-    regexp: "{{ gitolite_home }}/repositories /var/www/gitolite/dav fuse.fuse_git_bare_fs uid={{ gitolite_user }},gid={{ gitolite_user }},tree,allow_other,get_user_list_from_gitolite,provide_htaccess,root_object=master,gitolite_user_file={{ gitolite_home }}/dav_users,file_st_modes=33184=33256=41471=16872,default_permissions,nofail,ro 0 0"
-    line: "{{ gitolite_home }}/repositories /var/www/gitolite/dav fuse.fuse_git_bare_fs uid={{ gitolite_user }},gid={{ gitolite_user }},tree,allow_other,get_user_list_from_gitolite,provide_htaccess,root_object=master,gitolite_user_file={{ gitolite_home }}/dav_users,file_st_modes=33184=33256=41471=16872,default_permissions,nofail,ro 0 0"
+    boot: yes
+    fstype: fuse.fuse_git_bare_fs
+    opts: uid=git,gid=git,tree,allow_other,get_user_list_from_gitolite,provide_htaccess,root_object=master,gitolite_user_file=/data/gitolite/dav_users,file_st_modes=33184=33256=41471=16872,default_permissions,nofail,ro
+    path: /var/www/gitolite/dav
+    src: "{{ gitolite_home }}/repositories"
+    state: mounted
 - name: create server directory /var/www/bin
   file:
     group: "{{ gitolite_user }}"
