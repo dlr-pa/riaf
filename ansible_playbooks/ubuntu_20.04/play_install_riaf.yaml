@@ -2,6 +2,7 @@
 # ansible-playbook --ask-vault-pass -v play_install_riaf.yaml
 
 - name: installation and basic configuration
+  hosts: all
   become: yes
   vars_prompt:
     - name: ssh_adminkey_gitolite

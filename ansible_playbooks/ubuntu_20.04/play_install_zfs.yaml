@@ -2,6 +2,7 @@
 # ansible-playbook --ask-vault-pass -v play_install_zfs.yaml
 
 - name: install zfs
+  hosts: all
   become: yes
   tasks:
     - include: task_install_zfs.yaml
