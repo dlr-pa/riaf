@@ -48,6 +48,5 @@
     - include: task_install_riaf_enable_apache_modules.yaml
     - include: task_install_riaf_configuration_apache.yaml
     - include: task_install_riaf_configuration_apache_gitolite.yaml
-    - include: task_install_riaf.yaml
   handlers:
     - include: handler_install_riaf.yaml
