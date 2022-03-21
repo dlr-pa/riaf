@@ -1,0 +1,7 @@
+---
+- name: update system
+  hosts: all
+  become: yes
+  tasks:
+    - include: task_update.yaml
+    - include: task_install_riaf_fuse_git_bare_fs.yaml
