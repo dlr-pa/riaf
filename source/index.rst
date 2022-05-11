@@ -11,6 +11,8 @@ Welcome to riaf's documentation!
    :caption: Contents:
 
    preamble
+   installation
+   ansible_playbooks
 
 riaf documentation: https://riaf.pages.gitlab.dlr.de/riaf/
 
