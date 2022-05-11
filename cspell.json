@@ -12,7 +12,8 @@
         "pydabu",
 	"composability",
 	"quickstart", "toctree", "maxdepth", "genindex",
-	"Mohr"
+	"Mohr",
+	"adminkey", "servername", "zertifikat", "suexec"
     ],
     // ignorePaths: a list of globs to specify which files are to be ignored.
     "ignorePaths": [
