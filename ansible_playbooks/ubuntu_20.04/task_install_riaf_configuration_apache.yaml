@@ -29,7 +29,7 @@
 - name: create server directory /var/www/gitolite/dav
   file:
     group: "{{ gitolite_user }}"
-    mode: 0755
+    mode: 0750
     owner: "{{ gitolite_user }}"
     path: /var/www/gitolite/dav
     state: directory
@@ -47,10 +47,10 @@
 - name: set server name in /etc/apache2/sites-available/gitolite.conf
   lineinfile:
     backup: yes
-    insertafter: '^	#Redirect / https://www.example.com/'
-    line: '	Redirect / https://{{ servername }}/'
+    insertafter: '^		#ServerName www.example.com'
+    line: '		ServerName {{ servername }}'
     path: /etc/apache2/sites-available/gitolite.conf
-    regexp: '^	Redirect / https://{{ servername }}/'
+    regexp: '^		ServerName {{ servername }}'
 - name: disable default site
   shell: a2dissite 000-default
   notify:

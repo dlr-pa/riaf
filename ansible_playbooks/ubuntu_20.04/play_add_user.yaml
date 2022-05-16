@@ -1,0 +1,14 @@
+---
+# ansible-playbook --ask-vault-pass -v play_add_user.yaml
+
+- name: add user for basic authentication in apache
+  hosts: all
+  become: yes
+  vars_prompt:
+    - name: username
+      prompt: "username"
+      private: no
+    - name: userpassword
+      prompt: "userpassword"
+  tasks:
+    - include: task_riaf_add_user.yaml

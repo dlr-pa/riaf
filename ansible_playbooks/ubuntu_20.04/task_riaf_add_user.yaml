@@ -1,0 +1,18 @@
+# https://docs.ansible.com/ansible/2.5/modules/htpasswd_module.html
+
+- name: install passlib
+  apt:
+    name:
+      - python3-passlib
+    state: present
+    force_apt_get: yes
+
+- name: add user for basic authentication in apache
+  htpasswd:
+    crypt_scheme: sha256_crypt
+    group: root
+    mode: 0644
+    name: "{{ username }}"
+    owner: root
+    password: "{{ userpassword }}"
+    path: /etc/apache2/gitolite.passwd

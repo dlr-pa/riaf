@@ -8,10 +8,11 @@
     backup: yes
     boot: yes
     fstype: fuse.fuse_git_bare_fs
-    opts: uid=git,gid=git,tree,allow_other,get_user_list_from_gitolite,provide_htaccess,root_object=master,gitolite_user_file=/data/gitolite/dav_users,file_st_modes=33184=33256=41471=16872,default_permissions,nofail,ro
+    opts: uid=git,gid=git,tree,allow_other,get_user_list_from_gitolite,provide_htaccess,root_object=master,gitolite_user_file={{ gitolite_home }}/dav_users,file_st_modes=33184=33256=41471=16872,default_permissions,nofail,ro
     path: /var/www/gitolite/dav
     src: "{{ gitolite_home }}/repositories"
     state: mounted
+
 - name: create server directory /var/www/bin
   file:
     group: "{{ gitolite_user }}"
@@ -19,6 +20,8 @@
     owner: "{{ gitolite_user }}"
     path: /var/www/bin
     state: directory
+
+# gitolite-suexec-wrapper.sh
 - name: 'install gitolite-suexec-wrapper.sh'
   copy:
     backup: yes
@@ -35,17 +38,3 @@
     path: /var/www/bin/gitolite-suexec-wrapper.sh
     regexp: "/var/lib/gitolite"
     replace: "{{ gitolite_home }}"
-- name: 'install index.html'
-  copy:
-    backup: yes
-    dest: /var/www/gitolite/index.html
-    group: "{{ gitolite_user }}"
-    mode: 0644
-    owner: "{{ gitolite_user }}"
-    src: '{{ index_html }}'
-  notify:
-    - reload apache2
-- name: restart apache2
-  service:
-    name: apache2
-    state: restarted

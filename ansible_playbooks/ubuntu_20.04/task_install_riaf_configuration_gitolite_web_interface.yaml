@@ -1,0 +1,33 @@
+# https://docs.ansible.com/ansible/2.5/modules/get_url_module.html
+# https://docs.ansible.com/ansible/2.5/modules/blockinfile_module.html
+
+# gitolite_web_interface.py https://github.com/dlr-pa/gitolite_web_interface
+- name: 'install gitolite_web_interface.py'
+  get_url:
+    backup: yes
+    dest: /var/www/bin/gitolite_web_interface.py
+    group: "{{ gitolite_user }}"
+    mode: 0700
+    owner: "{{ gitolite_user }}"
+    url: https://raw.githubusercontent.com/dlr-pa/gitolite_web_interface/master/gitolite_web_interface.py
+- name: 'adapt gitolite_web_interface.py'
+  blockinfile:
+    backup: yes
+    block: |
+      CONFIG['gitolite_wrapper_script'] = \
+          '/var/www/bin/gitolite-suexec-wrapper.sh'
+      CONFIG['ssh_gitolite_user'] = '{{ gitolite_user }}'
+      CONFIG['gitolite_home'] = '{{ gitolite_home }}'
+      CONFIG['provided_options'] = {
+          'help': True,
+          'info': True,
+          'mngkey': True,
+          'createrepo': True}
+    group: "{{ gitolite_user }}"
+    marker: '# {mark} special setting'
+    marker_begin: start
+    marker_end: end
+    mode: 0700
+    owner: "{{ gitolite_user }}"
+    path: /var/www/bin/gitolite_web_interface.py
+    state: present

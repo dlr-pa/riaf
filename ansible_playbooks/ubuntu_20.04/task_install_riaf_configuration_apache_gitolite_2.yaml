@@ -1,0 +1,16 @@
+# https://docs.ansible.com/ansible/2.5/modules/copy_module.html
+
+- name: 'install index.html'
+  copy:
+    backup: yes
+    dest: /var/www/gitolite/index.html
+    group: "{{ gitolite_user }}"
+    mode: 0644
+    owner: "{{ gitolite_user }}"
+    src: '{{ index_html }}'
+  notify:
+    - reload apache2
+- name: restart apache2
+  service:
+    name: apache2
+    state: restarted
