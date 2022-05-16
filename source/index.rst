@@ -12,6 +12,8 @@ Welcome to riaf's documentation!
 
    preamble
    installation
+   user_management
+   walkthrough
    ansible_playbooks
 
 riaf documentation: https://riaf.pages.gitlab.dlr.de/riaf/

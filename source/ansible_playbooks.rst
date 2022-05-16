@@ -92,6 +92,23 @@ It uses the task :download:`task_gitolite_home2zfs_filesystem.yaml <../ansible_p
 .. include:: ../ansible_playbooks/ubuntu_20.04/task_gitolite_home2zfs_filesystem.yaml
    :literal:
 
+play_add_user.yaml
+------------------
+
+
+:download:`play_add_user.yaml <../ansible_playbooks/ubuntu_20.04/play_add_user.yaml>`
+
+.. include:: ../ansible_playbooks/ubuntu_20.04/play_add_user.yaml
+   :literal:
+
+It uses the following tasks and handler:
+
+:download:`task_riaf_add_user.yaml <../ansible_playbooks/ubuntu_20.04/task_riaf_add_user.yaml>`:
+
+.. include:: ../ansible_playbooks/ubuntu_20.04/task_riaf_add_user.yaml
+   :literal:
+
+
 play_update.yaml
 ----------------
 
