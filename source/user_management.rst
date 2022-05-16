@@ -17,5 +17,5 @@ a user in apache, e. g.:
 
 In this way the user gets a password.
 
-Using the self service key management [sskm]_ in the webinterface a user can
+Using the self service key management [sskm]_ in the web interface a user can
 manage his/her ssh keys stored in gitolite.

@@ -13,7 +13,9 @@
 	"composability",
 	"quickstart", "toctree", "maxdepth", "genindex",
 	"Mohr",
-	"adminkey", "servername", "zertifikat", "configfile", "suexec"
+	"adminkey", "servername", "zertifikat", "configfile", "suexec",
+	"walkthrough", "myone", "neykey", "gvfs", "Thunar", "davs",
+	"mountpoint", "somedate", "dabu", "htpasswd"
     ],
     // ignorePaths: a list of globs to specify which files are to be ignored.
     "ignorePaths": [
