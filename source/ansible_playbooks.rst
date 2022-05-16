@@ -59,9 +59,19 @@ It uses the following tasks and handler:
 .. include:: ../ansible_playbooks/ubuntu_20.04/task_install_riaf_configuration_apache.yaml
    :literal:
 
-:download:`task_install_riaf_configuration_apache_gitolite.yaml <../ansible_playbooks/ubuntu_20.04/task_install_riaf_configuration_apache_gitolite.yaml>`:
+:download:`task_install_riaf_configuration_apache_gitolite_1.yaml <../ansible_playbooks/ubuntu_20.04/task_install_riaf_configuration_apache_gitolite_1.yaml>`:
 
-.. include:: ../ansible_playbooks/ubuntu_20.04/task_install_riaf_configuration_apache_gitolite.yaml
+.. include:: ../ansible_playbooks/ubuntu_20.04/task_install_riaf_configuration_apache_gitolite_1.yaml
+   :literal:
+
+:download:`task_install_riaf_configuration_gitolite_web_interface.yaml <../ansible_playbooks/ubuntu_20.04/task_install_riaf_configuration_gitolite_web_interface.yaml>`:
+
+.. include:: ../ansible_playbooks/ubuntu_20.04/task_install_riaf_configuration_gitolite_web_interface.yaml
+   :literal:
+
+:download:`task_install_riaf_configuration_apache_gitolite_2.yaml <../ansible_playbooks/ubuntu_20.04/task_install_riaf_configuration_apache_gitolite_2.yaml>`:
+
+.. include:: ../ansible_playbooks/ubuntu_20.04/task_install_riaf_configuration_apache_gitolite_2.yaml
    :literal:
 
 :download:`handler_install_riaf.yaml <../ansible_playbooks/ubuntu_20.04/handler_install_riaf.yaml>`:
