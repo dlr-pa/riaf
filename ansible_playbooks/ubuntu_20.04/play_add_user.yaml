@@ -10,5 +10,13 @@
       private: no
     - name: userpassword
       prompt: "userpassword"
+    - name: gitolite_user
+      prompt: "gitolite user name"
+      default: "git"
+      private: no
+    - name: gitolite_home
+      prompt: "path to the gitolite home directory (repositories are stored here)"
+      default: "/data/gitolite"
+      private: no
   tasks:
     - include: task_riaf_add_user.yaml

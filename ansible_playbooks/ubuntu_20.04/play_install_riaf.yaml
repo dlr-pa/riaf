@@ -40,6 +40,10 @@
       prompt: "path to index.html"
       default: "configs/index.html"
       private: no
+    - name: gitolite_update_list_all_users
+      prompt: "path to the script update_list_all_users"
+      default: "configs/update_list_all_users"
+      private: no
   tasks:
     - include: task_install_riaf_packages.yaml
     - include: task_install_riaf_configuration_gitolite.yaml
