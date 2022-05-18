@@ -2,6 +2,6 @@
 passwdfile=/etc/apache2/gitolite.passwd
 davusersfile=/data/gitolite/dav_users
 
-if [ ! -f $davusersfile ] || [ $passwdfile -nt $davusersfile ]; then
+if [ ! -f $davusersfile ] || [ -n "$(find $passwdfile -newer $davusersfile)" ]; then
     cut -d ":" -f 1 $passwdfile > $davusersfile
 fi
