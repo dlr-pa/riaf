@@ -45,14 +45,15 @@
       default: "configs/update_list_all_users"
       private: no
   tasks:
-    #- include: task_install_riaf_packages.yaml
-    #- include: task_install_riaf_configuration_gitolite.yaml
-    #- include: task_install_riaf_configuration_sshd.yaml
-    #- include: task_install_riaf_fuse_git_bare_fs.yaml
-    #- include: task_install_riaf_enable_apache_modules.yaml
-    #- include: task_install_riaf_configuration_apache.yaml
-    #- include: task_install_riaf_configuration_apache_gitolite_1.yaml
+    - include: task_install_riaf_packages.yaml
+    - include: task_install_riaf_configuration_gitolite.yaml
+    - include: task_install_riaf_configuration_sshd.yaml
+    - include: task_install_riaf_fuse_git_bare_fs.yaml
+    - include: task_install_riaf_enable_apache_modules.yaml
+    - include: task_install_riaf_configuration_apache.yaml
+    - include: task_install_riaf_configuration_apache_gitolite_1.yaml
+    - include: task_install_riaf_gitolite_web_interface.yaml
     - include: task_install_riaf_configuration_gitolite_web_interface.yaml
-    #- include: task_install_riaf_configuration_apache_gitolite_2.yaml
+    - include: task_install_riaf_configuration_apache_gitolite_2.yaml
   handlers:
     - include: handler_install_riaf.yaml

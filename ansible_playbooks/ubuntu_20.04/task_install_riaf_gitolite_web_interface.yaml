@@ -1,0 +1,6 @@
+# https://docs.ansible.com/ansible/2.5/modules/pip_module.html
+
+# gitolite_web_interface.py https://github.com/dlr-pa/gitolite_web_interface
+- name: install gitolite_web_interface
+  pip:
+    name: https://github.com/dlr-pa/gitolite_web_interface/archive/refs/heads/master.zip

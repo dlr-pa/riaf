@@ -5,9 +5,6 @@
 - name: install fuse_git_bare_fs
   pip:
     name: https://github.com/dlr-pa/fuse_git_bare_fs/archive/refs/heads/master.zip
-- name: install gitolite_web_interface
-  pip:
-    name: https://github.com/dlr-pa/gitolite_web_interface/archive/refs/heads/master.zip
 - name: adapt fuse to allow non-root users to specify the allow_other option
   replace:
     backup: yes
