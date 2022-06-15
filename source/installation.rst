@@ -61,7 +61,9 @@ can also pass them as command line options, e. g.:
     --extra-vars "ssl_cert_crt=https_zertifikat/example.com.crt" \
     --extra-vars "ssl_cert_key=https_zertifikat/example.com.key" \
     --extra-vars "gitolite_suexec_wrapper=configs/gitolite-suexec-wrapper.sh" \
-    --extra-vars "index_html=configs/index.html"
+    --extra-vars "index_html=configs/index.html" \
+    --extra-vars "gitolite_update_list_all_users=configs/update_list_all_users" \
+    --extra-vars "server_timestamping_script=configs/server_timestamping"
 
 With this the following software is installed and configured:
 
@@ -97,6 +99,18 @@ The starting page :download:`index.html <../ansible_playbooks/ubuntu_20.04/confi
 .. include:: ../ansible_playbooks/ubuntu_20.04/configs/index.html
    :literal:
    :code: html
+
+The gitolite trigger :download:`server_timestamping <../ansible_playbooks/ubuntu_20.04/configs/server_timestamping>` does gpg signed timestamping on pushes to the server. So this cryptographic signature represent the time the data reaches the server and later changes of the history is not possible without the private gpg key own and stored on the server.
+
+.. include:: ../ansible_playbooks/ubuntu_20.04/configs/server_timestamping
+   :literal:
+   :code: html
+
+The tool :download:`update_list_all_users <../ansible_playbooks/ubuntu_20.04/configs/update_list_all_users>` is necessary to allow a listing of all users. This is used for the dav interface.:
+
+.. include:: ../ansible_playbooks/ubuntu_20.04/configs/update_list_all_users
+   :literal:
+   :code: python3
 
 .. only:: html
 

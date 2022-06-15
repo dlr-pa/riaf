@@ -79,6 +79,11 @@ It uses the following tasks and handler:
 .. include:: ../ansible_playbooks/ubuntu_20.04/task_install_riaf_configuration_apache_gitolite_2.yaml
    :literal:
 
+:download:`task_install_riaf_gitolite_add_trigger_server_timestamping.yaml <../ansible_playbooks/ubuntu_20.04/task_install_riaf_gitolite_add_trigger_server_timestamping.yaml>`:
+
+.. include:: ../ansible_playbooks/ubuntu_20.04/task_install_riaf_gitolite_add_trigger_server_timestamping.yaml
+   :literal:
+
 :download:`handler_install_riaf.yaml <../ansible_playbooks/ubuntu_20.04/handler_install_riaf.yaml>`:
 
 .. include:: ../ansible_playbooks/ubuntu_20.04/handler_install_riaf.yaml

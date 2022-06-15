@@ -1,4 +1,6 @@
+# https://docs.ansible.com/ansible/2.5/modules/copy_module.html
 # https://docs.ansible.com/ansible/2.5/modules/blockinfile_module.html
+# https://docs.ansible.com/ansible/2.5/modules/pause_module.html
 
 - name: 'install gitolite trigger server_timestamping'
   copy:
