@@ -12,7 +12,7 @@
   blockinfile:
     backup: yes
     block: |
-      
+
       # add gitolite trigger
       POST_GIT                 =>
       [
