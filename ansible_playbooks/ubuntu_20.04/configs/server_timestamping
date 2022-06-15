@@ -1,0 +1,109 @@
+#!/bin/bash
+# Author: Daniel Mohr
+# Date: 2022-06-15
+#
+# This script should run as gitolite trigger at 'POST_GIT'.
+# It will add a server timestamping signed with a gpg key on the default branch.
+#
+# It tries first to read the gpg key id from '$HOME/.server_timestamping.cfg'.
+# If the file does not exists, this script creates a gpg key and stores it id
+# in the file '$HOME/.server_timestamping.cfg'.
+#
+# If necessary, in the commited repository the branch 'server_timestamping'
+# is created. The default branch (HEAD) is merged to the branch
+# 'server_timestamping' and an empty, gpg signed commit is done.
+
+# command line parameters and environment are desribed on:
+# https://gitolite.com/gitolite/triggers.html
+
+#set -e
+
+runtime=$(date +%Y-%m-%d.%H:%M:%S)
+
+if [ $# -gt 0 ]; then
+    # check command line parameters
+    trigger=$1
+else
+    exit 1
+fi
+
+if [ $trigger != "POST_GIT" ]; then
+    # check first command line parameter
+    exit 1
+fi
+
+if [ $6 != "git-receive-pack" ]; then
+    exit 0
+fi
+
+echo -e "$runtime\t$$\tdo server_timestamping $(date -Iseconds)" >> $GL_LOGFILE
+
+# check gpg key available
+configfile=$HOME/.server_timestamping.cfg
+if [ -f $configfile ]; then
+    gpgkey=$(cat $configfile)
+    gpg --list-keys $gpgkey || exit 1
+else
+    echo -e "$runtime\t$$\tno gpg key availabe, create one" >> $GL_LOGFILE
+    gpgkey=$(gpg --batch --quick-generate-key --passphrase '' "$USER@$(hostname)" future-default default never 2>&1 | grep "marked as ultimately trusted" | cut -d " " -f 3)
+    echo $gpgkey > $configfile
+fi
+
+# check gpg key available
+gpg --list-keys $gpgkey || exit 1
+
+# POST_GIT a/bar testuser W any git-receive-pack
+# $HOME
+# $GL_REPO_BASE
+# $GL_REPO
+# $GL_LOGFILE
+# $GL_USER
+repopath=$GL_REPO_BASE/$GL_REPO.git
+
+tmpdir=$(mktemp --directory)
+
+# Unfortunately, since we do not know how many commits were done,
+# we have to get the full history.
+# Maybe we should use a better tmpdir to allow hardlinking (--local).
+# Further, we can skip the working tree (--no-checkout).
+git clone --no-checkout $repopath $tmpdir
+
+# check if last commit was on default branch (HEAD)
+#allbranches=$(git branch --all --sort=creatordate --format "%(refname)")
+lastcommittedbranch=$(cd $tmpdir && git branch --list --all --sort=creatordate --format "%(refname)" | tail -n 1)
+headbranch=$(cd $tmpdir && git branch --list --all --sort=creatordate --format "%(refname)" | grep heads)
+echo $lastcommittedbranch | grep --quiet $(basename $headbranch) && res=1 || res=0
+if [ $res == 0 ]; then
+    # the last commit was not done to default branch (HEAD)
+    rm -rf $tmpdir
+    echo -e "$runtime\t$$\tdo not server_timestamping on branch $lastcommittedbranch" >> $GL_LOGFILE
+    exit 0
+fi
+
+(cd $tmpdir && git config user.name "$USER")
+(cd $tmpdir && git config user.email "$USER@$(hostname)")
+(cd $tmpdir && git config user.signingkey $gpgkey)
+(cd $tmpdir && git config commit.gpgSign 1)
+
+(cd $tmpdir && git branch --list --all | grep --quiet server_timestamping) && res=1 || res=0
+
+if [ $res == 0 ]; then
+    echo -e "$runtime\t$$\tcreate branch server_timestamping in $repopath" >> $GL_LOGFILE
+    (cd $tmpdir && git branch --quiet server_timestamping)
+fi
+# Unfortunately, 'git checkout' creates a working tree.
+(cd $tmpdir && git checkout server_timestamping)
+(cd $tmpdir && git merge --no-commit --quiet remotes/origin/HEAD)
+(cd $tmpdir && git commit --allow-empty -m "signing commit")
+if [ $res == 0 ]; then
+    (cd $tmpdir && git push --set-upstream origin server_timestamping)
+else
+    (cd $tmpdir && git push)
+fi
+
+rm -rf $tmpdir
+
+#env > /data/gitolite/e1
+#echo $* > /data/gitolite/e2
+
+echo -e "$runtime\t$$\tdid server_timestamping in $repopath" >> $GL_LOGFILE

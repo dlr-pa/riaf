@@ -1,0 +1,30 @@
+# https://docs.ansible.com/ansible/2.5/modules/blockinfile_module.html
+
+- name: 'install gitolite trigger server_timestamping'
+  copy:
+    backup: yes
+    dest: /usr/share/gitolite3/triggers/server_timestamping
+    mode: 0755
+    src: '{{ server_timestamping_script }}'
+- name: 'add gitolite trigger server_timestamping'
+  blockinfile:
+    backup: yes
+    block: |
+      
+      # add gitolite trigger
+      POST_GIT                 =>
+      [
+        'server_timestamping'
+      ],
+    group: "{{ gitolite_user }}"
+    marker: '    # {mark}'
+    marker_begin: "------------------------------------------------------------------"
+    marker_end: "List of commands and features to enable"
+    mode: 0700
+    owner: "{{ gitolite_user }}"
+    path: "{{ gitolite_home }}/.gitolite.rc"
+    state: present
+- name: "###### information gpg key ######"
+  pause:
+    seconds: 1
+    prompt: 'You can put the gpg key id to use in the file {{ gitolite_home }}/.server_timestamping.cfg on the server. Otherwise a gpg key will be created.'
