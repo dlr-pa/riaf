@@ -27,30 +27,30 @@ else
     exit 1
 fi
 
-if [ $trigger != "POST_GIT" ]; then
+if [ "$trigger" != "POST_GIT" ]; then
     # check first command line parameter
     exit 1
 fi
 
-if [ $6 != "git-receive-pack" ]; then
+if [ "$6" != "git-receive-pack" ]; then
     exit 0
 fi
 
-echo -e "$runtime\t$$\tdo server_timestamping $(date -Iseconds)" >> $GL_LOGFILE
+echo -e "$runtime\t$$\tdo server_timestamping $(date -Iseconds)" >> "$GL_LOGFILE"
 
 # check gpg key available
 configfile=$HOME/.server_timestamping.cfg
-if [ -f $configfile ]; then
-    gpgkey=$(cat $configfile)
-    gpg --list-keys $gpgkey || exit 1
+if [ -f "$configfile" ]; then
+    gpgkey=$(cat "$configfile")
+    gpg --list-keys "$gpgkey" || exit 1
 else
-    echo -e "$runtime\t$$\tno gpg key availabe, create one" >> $GL_LOGFILE
+    echo -e "$runtime\t$$\tno gpg key availabe, create one" >> "$GL_LOGFILE"
     gpgkey=$(gpg --batch --quick-generate-key --passphrase '' "$USER@$(hostname)" future-default default never 2>&1 | grep "marked as ultimately trusted" | cut -d " " -f 3)
-    echo $gpgkey > $configfile
+    echo "$gpgkey" > "$configfile"
 fi
 
 # check gpg key available
-gpg --list-keys $gpgkey || exit 1
+gpg --list-keys "$gpgkey" || exit 1
 
 # POST_GIT a/bar testuser W any git-receive-pack
 # $HOME
@@ -66,44 +66,44 @@ tmpdir=$(mktemp --directory)
 # we have to get the full history.
 # Maybe we should use a better tmpdir to allow hardlinking (--local).
 # Further, we can skip the working tree (--no-checkout).
-git clone --no-checkout $repopath $tmpdir
+git clone --no-checkout "$repopath" "$tmpdir"
 
 # check if last commit was on default branch (HEAD)
 #allbranches=$(git branch --all --sort=creatordate --format "%(refname)")
-lastcommittedbranch=$(cd $tmpdir && git branch --list --all --sort=creatordate --format "%(refname)" | tail -n 1)
-headbranch=$(cd $tmpdir && git branch --list --all --sort=creatordate --format "%(refname)" | grep heads)
-echo $lastcommittedbranch | grep --quiet $(basename $headbranch) && res=1 || res=0
+lastcommittedbranch=$(cd "$tmpdir" && git branch --list --all --sort=creatordate --format "%(refname)" | tail -n 1)
+headbranch=$(cd "$tmpdir" && git branch --list --all --sort=creatordate --format "%(refname)" | grep heads)
+echo "$lastcommittedbranch" | grep --quiet $(basename "$headbranch") && res=1 || res=0
 if [ $res == 0 ]; then
     # the last commit was not done to default branch (HEAD)
-    rm -rf $tmpdir
-    echo -e "$runtime\t$$\tdo not server_timestamping on branch $lastcommittedbranch" >> $GL_LOGFILE
+    rm -rf "$tmpdir"
+    echo -e "$runtime\t$$\tdo not server_timestamping on branch $lastcommittedbranch" >> "$GL_LOGFILE"
     exit 0
 fi
 
-(cd $tmpdir && git config user.name "$USER")
-(cd $tmpdir && git config user.email "$USER@$(hostname)")
-(cd $tmpdir && git config user.signingkey $gpgkey)
-(cd $tmpdir && git config commit.gpgSign 1)
+(cd "$tmpdir" && git config user.name "$USER")
+(cd "$tmpdir" && git config user.email "$USER@$(hostname)")
+(cd "$tmpdir" && git config user.signingkey $gpgkey)
+(cd "$tmpdir" && git config commit.gpgSign 1)
 
-(cd $tmpdir && git branch --list --all | grep --quiet server_timestamping) && res=1 || res=0
+(cd "$tmpdir" && git branch --list --all | grep --quiet server_timestamping) && res=1 || res=0
 
 if [ $res == 0 ]; then
-    echo -e "$runtime\t$$\tcreate branch server_timestamping in $repopath" >> $GL_LOGFILE
-    (cd $tmpdir && git branch --quiet server_timestamping)
+    echo -e "$runtime\t$$\tcreate branch server_timestamping in $repopath" >> "$GL_LOGFILE"
+    (cd "$tmpdir" && git branch --quiet server_timestamping)
 fi
 # Unfortunately, 'git checkout' creates a working tree.
-(cd $tmpdir && git checkout server_timestamping)
-(cd $tmpdir && git merge --no-commit --quiet remotes/origin/HEAD)
-(cd $tmpdir && git commit --allow-empty -m "signing commit")
+(cd "$tmpdir" && git checkout server_timestamping)
+(cd "$tmpdir" && git merge --no-commit --quiet remotes/origin/HEAD)
+(cd "$tmpdir" && git commit --allow-empty -m "signing commit")
 if [ $res == 0 ]; then
-    (cd $tmpdir && git push --set-upstream origin server_timestamping)
+    (cd "$tmpdir" && git push --set-upstream origin server_timestamping)
 else
-    (cd $tmpdir && git push)
+    (cd "$tmpdir" && git push)
 fi
 
-rm -rf $tmpdir
+rm -rf "$tmpdir"
 
 #env > /data/gitolite/e1
 #echo $* > /data/gitolite/e2
 
-echo -e "$runtime\t$$\tdid server_timestamping in $repopath" >> $GL_LOGFILE
+echo -e "$runtime\t$$\tdid server_timestamping in $repopath" >> "$GL_LOGFILE"
