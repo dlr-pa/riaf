@@ -72,7 +72,7 @@ git clone --no-checkout "$repopath" "$tmpdir"
 #allbranches=$(git branch --all --sort=creatordate --format "%(refname)")
 lastcommittedbranch=$(cd "$tmpdir" && git branch --list --all --sort=creatordate --format "%(refname)" | tail -n 1)
 headbranch=$(cd "$tmpdir" && git branch --list --all --sort=creatordate --format "%(refname)" | grep heads)
-echo "$lastcommittedbranch" | grep --quiet $(basename "$headbranch") && res=1 || res=0
+echo "$lastcommittedbranch" | grep --quiet "$(basename "$headbranch")" && res=1 || res=0
 if [ $res == 0 ]; then
     # the last commit was not done to default branch (HEAD)
     rm -rf "$tmpdir"
@@ -82,7 +82,7 @@ fi
 
 (cd "$tmpdir" && git config user.name "$USER")
 (cd "$tmpdir" && git config user.email "$USER@$(hostname)")
-(cd "$tmpdir" && git config user.signingkey $gpgkey)
+(cd "$tmpdir" && git config user.signingkey "$gpgkey")
 (cd "$tmpdir" && git config commit.gpgSign 1)
 
 (cd "$tmpdir" && git branch --list --all | grep --quiet server_timestamping) && res=1 || res=0
