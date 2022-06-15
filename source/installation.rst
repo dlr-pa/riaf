@@ -82,11 +82,17 @@ Further you need to prepare a few additional tools and config files:
 
 You should prepare your ssl certificates.
 
+gitolite.conf
+_____________
+
 The apache configuration :download:`gitolite.conf <../ansible_playbooks/ubuntu_20.04/configs/gitolite.conf>` is a good example. It is adapted by the ansible playbook:
 
 .. include:: ../ansible_playbooks/ubuntu_20.04/configs/gitolite.conf
    :literal:
    :code: apache
+
+gitolite-suexec-wrapper.sh
+__________________________
 
 The tool :download:`gitolite-suexec-wrapper.sh <../ansible_playbooks/ubuntu_20.04/configs/gitolite-suexec-wrapper.sh>` is just a small wrapper to use gitolite with both ssh and http mode clients (see `Making repositories available to both ssh and http mode clients <https://gitolite.com/gitolite/contrib/ssh-and-http.html>`_).  It is adapted by the ansible playbook:
 
@@ -94,17 +100,26 @@ The tool :download:`gitolite-suexec-wrapper.sh <../ansible_playbooks/ubuntu_20.0
    :literal:
    :code: sh
 
+index.html
+__________
+
 The starting page :download:`index.html <../ansible_playbooks/ubuntu_20.04/configs/index.html>` for the web interface is a very basic example:
 
 .. include:: ../ansible_playbooks/ubuntu_20.04/configs/index.html
    :literal:
    :code: html
 
+server_timestamping
+___________________
+
 The gitolite trigger :download:`server_timestamping <../ansible_playbooks/ubuntu_20.04/configs/server_timestamping>` does gpg signed timestamping on pushes to the server. So this cryptographic signature represent the time the data reaches the server and later changes of the history is not possible without the private gpg key own and stored on the server.
 
 .. include:: ../ansible_playbooks/ubuntu_20.04/configs/server_timestamping
    :literal:
    :code: html
+
+update_list_all_users
+_____________________
 
 The tool :download:`update_list_all_users <../ansible_playbooks/ubuntu_20.04/configs/update_list_all_users>` is necessary to allow a listing of all users. This is used for the dav interface.:
 
