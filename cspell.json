@@ -16,7 +16,8 @@
 	"adminkey", "servername", "zertifikat", "configfile", "suexec",
 	"walkthrough", "myone", "neykey", "gvfs", "Thunar", "davs",
 	"mountpoint", "somedate", "dabu", "htpasswd",
-	"newkey", "davfs", "somedata"
+	"newkey", "davfs", "somedata",
+	"timestamping"
     ],
     // ignorePaths: a list of globs to specify which files are to be ignored.
     "ignorePaths": [
