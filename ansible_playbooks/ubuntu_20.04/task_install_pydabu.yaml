@@ -1,0 +1,21 @@
+# https://docs.ansible.com/ansible/2.5/modules/apt_module.html
+# https://docs.ansible.com/ansible/2.5/modules/pip_module.html
+
+# install pydabu
+- name: install dependencies for pydabu via apt-get
+  apt:
+    name:
+      - libudunits2-0
+      - python3-jsonschema
+      - python3-netcdf4
+      - python3-pip
+      - python3-setuptools
+      - python3-wheel
+    state: present
+    force_apt_get: yes
+- name: install dependencies for pydabu via pip
+  pip:
+    name: cfchecker
+- name: install pydabu
+  pip:
+    name: https://gitlab.com/dlr-pa/pydabu/-/archive/master/pydabu-master.zip
