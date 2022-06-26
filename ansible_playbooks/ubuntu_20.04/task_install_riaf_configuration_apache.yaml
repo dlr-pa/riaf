@@ -44,7 +44,16 @@
     src: '{{ configfile_gitolite_site }}'
   notify:
     - reload apache2
-- name: set server name in /etc/apache2/sites-available/gitolite.conf
+- name: add apache user www-data to group git
+  shell: usermod -a -G "{{ gitolite_user }}" www-data
+- name: set server name in /etc/apache2/sites-available/gitolite.conf 1/2
+  lineinfile:
+    backup: yes
+    insertafter: '^	#Redirect / https://www.example.com/'
+    line: '	Redirect / https://{{ servername }}/'
+    path: /etc/apache2/sites-available/gitolite.conf
+    regexp: '^	Redirect / https://{{ servername }}/'
+- name: set server name in /etc/apache2/sites-available/gitolite.conf 2/2
   lineinfile:
     backup: yes
     insertafter: '^		#ServerName www.example.com'
