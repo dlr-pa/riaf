@@ -48,9 +48,15 @@
       prompt: "path to the server_timestamping script"
       default: "configs/server_timestamping"
       private: no
+    - name: riaf_landing_page_script
+      prompt: "path to the riaf_landing_page script"
+      default: "configs/riaf_landing_page"
+      private: no
   tasks:
     - include: task_install_riaf_packages.yaml
+    - include: task_install_pydabu.yaml
     - include: task_install_riaf_configuration_gitolite.yaml
+    - include: task_install_riaf_gitolite_add_trigger_riaf_post_git.yaml
     - include: task_install_riaf_configuration_sshd.yaml
     - include: task_install_riaf_fuse_git_bare_fs.yaml
     - include: task_install_riaf_enable_apache_modules.yaml
@@ -59,7 +65,5 @@
     - include: task_install_riaf_gitolite_web_interface.yaml
     - include: task_install_riaf_configuration_gitolite_web_interface.yaml
     - include: task_install_riaf_configuration_apache_gitolite_2.yaml
-    - include: task_install_pydabu.yaml
-    - include: task_install_riaf_gitolite_add_trigger_server_timestamping.yaml
   handlers:
     - include: handler_install_riaf.yaml

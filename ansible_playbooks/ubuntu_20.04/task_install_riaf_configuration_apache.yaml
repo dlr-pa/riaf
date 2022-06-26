@@ -1,4 +1,5 @@
 # https://docs.ansible.com/ansible/2.5/modules/copy_module.html
+# https://docs.ansible.com/ansible/2.5/modules/file_module.html
 # https://docs.ansible.com/ansible/2.5/modules/shell_module.html
 
 # adapt apache
@@ -27,6 +28,13 @@
     path: /var/www/gitolite
     state: directory
 - name: create server directory /var/www/gitolite/dav
+  file:
+    group: "{{ gitolite_user }}"
+    mode: 0750
+    owner: "{{ gitolite_user }}"
+    path: /var/www/gitolite/dav
+    state: directory
+- name: create server directory /var/www/gitolite/dabu
   file:
     group: "{{ gitolite_user }}"
     mode: 0750

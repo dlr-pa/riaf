@@ -1,0 +1,144 @@
+#!/bin/bash
+# Author: Daniel Mohr
+# Date: 2022-06-26
+#
+# This script should run as gitolite trigger at 'POST_GIT'.
+# It will add a landing page on the default branch.
+#
+# If necessary, in the commited repository the branch 'landing_page'
+# is created.
+#
+# In the branch 'landing_page' a file 'index.html' is created based
+# on the default branch (HEAD)
+
+# command line parameters and environment are desribed on:
+# https://gitolite.com/gitolite/triggers.html
+
+# run trigger from gitolite account command line:
+# GL_LOGFILE="$HOME/.gitolite/logs/gitolite-2022-06.log" GL_REPO_BASE="$HOME/repositories" GL_REPO="foo/foo" /usr/share/gitolite3/triggers/riaf_landing_page POST_GIT foo/foo testuser W any git-receive-pack
+
+#set -e
+
+runtime=$(date +%Y-%m-%d.%H:%M:%S)
+
+if [ $# -gt 0 ]; then
+    # check command line parameters
+    trigger=$1
+else
+    exit 1
+fi
+
+if [ "$trigger" != "POST_GIT" ]; then
+    # check first command line parameter
+    exit 1
+fi
+
+if [ "$6" != "git-receive-pack" ]; then
+    exit 0
+fi
+
+echo -e "$runtime\t$$\tdo riaf_landing_page $(date -Iseconds)" >> "$GL_LOGFILE"
+
+# POST_GIT a/bar testuser W any git-receive-pack
+# $HOME
+# $GL_REPO_BASE
+# $GL_REPO
+# $GL_LOGFILE
+# $GL_USER
+repopath=$GL_REPO_BASE/$GL_REPO.git
+
+tmpdira=$(mktemp --directory)
+tmpdirb=$(mktemp --directory)
+
+# Maybe we should use a better tmpdir to allow hardlinking (--local).
+git clone --depth 1 "$repopath" "$tmpdira"
+
+# check if last commit was on default branch (HEAD)
+lastcommittedbranch=$(cd "$tmpdira" && git branch --list --all --sort=creatordate --format "%(refname)" | tail -n 1)
+headbranch=$(cd "$tmpdira" && git branch --list --all --sort=creatordate --format "%(refname)" | grep heads)
+echo "$lastcommittedbranch" | grep --quiet "$(basename "$headbranch")" && res=1 || res=0
+if [ $res == 0 ]; then
+    # the last commit was not done to default branch (HEAD)
+    rm -rf "$tmpdira" "$tmpdirb"
+    echo -e "$runtime\t$$\tdo not riaf_landing_page on branch $lastcommittedbranch" >> "$GL_LOGFILE"
+    exit 0
+fi
+
+# check if metadata available
+isdabu=0
+if [ -f "$tmpdira/.dabu.json" ]; then
+    if [ -f "$tmpdira/.dabu.schema" ]; then
+	isdabu=1
+    fi
+fi
+
+if [ $isdabu = 0 ]; then
+    # no metadata availalbe
+    rm -rf "$tmpdira" "$tmpdirb"
+    echo -e "$runtime\t$$\tdo not riaf_landing_page without metadata in repo" >> "$GL_LOGFILE"
+    exit 0
+fi
+
+# check if metadata are ok
+jsonschema -i "$tmpdira/.dabu.json" "$tmpdira/.dabu.schema" || dabuok=0 && dabuok=1
+
+if [ $dabuok = 1 ]; then
+    cp -p "$tmpdira/.dabu.json" "$tmpdira/.dabu.schema" "$tmpdirb"
+fi
+
+# set git environment in repo
+(cd "$tmpdira" && git config user.name "$USER")
+(cd "$tmpdira" && git config user.email "$USER@$(hostname)")
+
+# check if branch landing_page available
+(cd "$tmpdira" && git branch --list --all | grep --quiet landing_page) && res=1 || res=0
+
+if [ $res == 0 ]; then
+    echo -e "$runtime\t$$\tcreate orphan branch landing_page in $repopath" >> "$GL_LOGFILE"
+    (cd "$tmpdira" && git checkout --orphan landing_page)
+    (cd "$tmpdira" && git reset --hard)
+else
+    (cd "$tmpdira" && git checkout landing_page)
+fi
+index="$tmpdira/index.html"
+echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/transitional.dtd">' > $index
+echo '<html>' >> $index
+echo '<body>' >> $index
+echo "<h1>$GL_REPO</h1>" >> $index
+if [ $dabuok = 1 ]; then
+    cp -p "$tmpdirb/.dabu.json" "$tmpdira"
+    (cd "$tmpdira" && git add .dabu.json)
+    echo '<p>meta data ".dabu.json" follow ".dabu.schema"</p>' >> $index
+    echo '<p><ul><li><a href=".dabu.json">.dabu.json</a></li></ul></p>' >> $index
+else
+    echo "<h2>error</h2>" >> $index
+    echo '<p>meta data ".dabu.json" do not follow ".dabu.schema"</p>' >> $index
+fi
+echo '</body>' >> $index
+echo '</html>' >> $index
+(cd "$tmpdira" && git add index.html)
+if [ $dabuok = 1 ]; then
+    if [ $res == 0 ]; then
+	(cd "$tmpdira" && git commit -m "added landing page and .dabu.json")
+    else
+	(cd "$tmpdira" && git commit -m "updated landing page and adding .dabu.json")
+    fi
+else
+    if [ $res == 0 ]; then
+	(cd "$tmpdira" && git commit -m "added landing page with error message")
+    else
+	(cd "$tmpdira" && git commit -m "updated landing page with error message")
+    fi
+fi
+if [ $res == 0 ]; then
+    (cd "$tmpdira" && git push --set-upstream origin landing_page)
+else
+    (cd "$tmpdira" && git push)
+fi
+
+rm -rf "$tmpdira" "$tmpdirb"
+
+#env > /data/gitolite/e1
+#echo $* > /data/gitolite/e2
+
+echo -e "$runtime\t$$\tdid riaf_landing_page in $repopath" >> "$GL_LOGFILE"

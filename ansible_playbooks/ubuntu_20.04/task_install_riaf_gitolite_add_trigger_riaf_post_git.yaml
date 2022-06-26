@@ -8,7 +8,13 @@
     dest: /usr/share/gitolite3/triggers/server_timestamping
     mode: 0755
     src: '{{ server_timestamping_script }}'
-- name: 'add gitolite trigger server_timestamping'
+- name: 'install gitolite trigger riaf_landing_page'
+  copy:
+    backup: yes
+    dest: /usr/share/gitolite3/triggers/riaf_landing_page
+    mode: 0755
+    src: '{{ riaf_landing_page_script }}'
+- name: 'add gitolite trigger server_timestamping and riaf_landing_page'
   blockinfile:
     backup: yes
     block: |
@@ -16,7 +22,8 @@
       # add gitolite trigger
       POST_GIT                 =>
       [
-        'server_timestamping'
+        'server_timestamping',
+        'riaf_landing_page'
       ],
     group: "{{ gitolite_user }}"
     marker: '    # {mark}'

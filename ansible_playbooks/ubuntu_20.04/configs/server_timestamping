@@ -1,6 +1,6 @@
 #!/bin/bash
 # Author: Daniel Mohr
-# Date: 2022-06-15
+# Date: 2022-06-26
 #
 # This script should run as gitolite trigger at 'POST_GIT'.
 # It will add a server timestamping signed with a gpg key on the default branch.
@@ -15,6 +15,9 @@
 
 # command line parameters and environment are desribed on:
 # https://gitolite.com/gitolite/triggers.html
+
+# run trigger from gitolite account command line:
+# GL_LOGFILE="$HOME/.gitolite/logs/gitolite-2022-06.log" GL_REPO_BASE="$HOME/repositories" GL_REPO="foo/foo" /usr/share/gitolite3/triggers/server_timestamping POST_GIT foo/foo testuser W any git-receive-pack
 
 #set -e
 
