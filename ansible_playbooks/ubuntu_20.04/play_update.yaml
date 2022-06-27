@@ -4,5 +4,6 @@
   become: yes
   tasks:
     - include: task_update.yaml
+    - include: task_install_pydabu.yaml
     - include: task_install_riaf_fuse_git_bare_fs.yaml
     - include: task_install_riaf_gitolite_web_interface.yaml
