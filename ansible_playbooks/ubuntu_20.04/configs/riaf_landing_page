@@ -81,7 +81,8 @@ if [ $isdabu = 0 ]; then
 fi
 
 # check if metadata are ok
-jsonschema -i "$tmpdira/.dabu.json" "$tmpdira/.dabu.schema" ; dabunotOK=$?
+#jsonschema -i "$tmpdira/.dabu.json" "$tmpdira/.dabu.schema" ; dabunotOK=$?
+pydabu check_data_bubble -dir "$tmpdira" ; dabunotOK=$?
 
 if [ $dabunotOK = 0 ]; then
     cp -p "$tmpdira/.dabu.json" "$tmpdira/.dabu.schema" "$tmpdirb"
