@@ -51,12 +51,13 @@ tmpdira=$(mktemp --directory)
 tmpdirb=$(mktemp --directory)
 
 # Maybe we should use a better tmpdir to allow hardlinking (--local).
-git clone --depth 1 "$repopath" "$tmpdira"
+git clone --depth 1 --no-single-branch "$repopath" "$tmpdira"
 
-# check if last commit was on default branch (HEAD)
+# We assume here, that server_timestamping was done just before this script
+# runs.
+# check if last commit was on branch 'server_timestamping'
 lastcommittedbranch=$(cd "$tmpdira" && git branch --list --all --sort=creatordate --format "%(refname)" | tail -n 1)
-headbranch=$(cd "$tmpdira" && git branch --list --all --sort=creatordate --format "%(refname)" | grep heads)
-echo "$lastcommittedbranch" | grep --quiet "$(basename "$headbranch")" && res=1 || res=0
+echo "$lastcommittedbranch" | grep --quiet "server_timestamping" && res=1 || res=0
 if [ $res == 0 ]; then
     # the last commit was not done to default branch (HEAD)
     rm -rf "$tmpdira" "$tmpdirb"
@@ -101,21 +102,21 @@ else
     (cd "$tmpdira" && git checkout landing_page)
 fi
 index="$tmpdira/index.html"
-echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/transitional.dtd">' > $index
-echo '<html>' >> $index
-echo '<body>' >> $index
-echo "<h1>$GL_REPO</h1>" >> $index
+echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/transitional.dtd">' > "$index"
+echo '<html>' >> "$index"
+echo '<body>' >> "$index"
+echo "<h1>$GL_REPO</h1>" >> "$index"
 if [ $dabuok = 1 ]; then
     cp -p "$tmpdirb/.dabu.json" "$tmpdira"
     (cd "$tmpdira" && git add .dabu.json)
-    echo '<p>meta data ".dabu.json" follow ".dabu.schema"</p>' >> $index
-    echo '<p><ul><li><a href=".dabu.json">.dabu.json</a></li></ul></p>' >> $index
+    echo '<p>meta data ".dabu.json" follow ".dabu.schema"</p>' >> "$index"
+    echo '<p><ul><li><a href=".dabu.json">.dabu.json</a></li></ul></p>' >> "$index"
 else
-    echo "<h2>error</h2>" >> $index
-    echo '<p>meta data ".dabu.json" do not follow ".dabu.schema"</p>' >> $index
+    echo "<h2>error</h2>" >> "$index"
+    echo '<p>meta data ".dabu.json" do not follow ".dabu.schema"</p>' >> "$index"
 fi
-echo '</body>' >> $index
-echo '</html>' >> $index
+echo '</body>' >> "$index"
+echo '</html>' >> "$index"
 (cd "$tmpdira" && git add index.html)
 if [ $dabuok = 1 ]; then
     if [ $res == 0 ]; then
