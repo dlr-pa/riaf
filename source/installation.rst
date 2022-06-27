@@ -63,7 +63,8 @@ can also pass them as command line options, e. g.:
     --extra-vars "gitolite_suexec_wrapper=configs/gitolite-suexec-wrapper.sh" \
     --extra-vars "index_html=configs/index.html" \
     --extra-vars "gitolite_update_list_all_users=configs/update_list_all_users" \
-    --extra-vars "server_timestamping_script=configs/server_timestamping"
+    --extra-vars "server_timestamping_script=configs/server_timestamping" \
+    --extra-vars "riaf_landing_page_script=configs/riaf_landing_page"
 
 With this the following software is installed and configured:
 
@@ -112,9 +113,18 @@ The starting page :download:`index.html <../ansible_playbooks/ubuntu_20.04/confi
 server_timestamping
 ___________________
 
-The gitolite trigger :download:`server_timestamping <../ansible_playbooks/ubuntu_20.04/configs/server_timestamping>` does gpg signed timestamping on pushes to the server. So this cryptographic signature represent the time the data reaches the server and later changes of the history is not possible without the private gpg key own and stored on the server.
+The gitolite trigger :download:`server_timestamping <../ansible_playbooks/ubuntu_20.04/configs/server_timestamping>` does gpg signed timestamping on pushes to the server. So this cryptographic signature represent the time the data reaches the server and later changes of the history is not possible without the private gpg key own and stored on the server. This timestamping is stored in the branch ``server_timestamping``.
 
 .. include:: ../ansible_playbooks/ubuntu_20.04/configs/server_timestamping
+   :literal:
+   :code: html
+
+riaf_landing_page
+___________________
+
+If metadata are available on the default branch in the format [pydabu]_ uses, the gitolite trigger :download:`riaf_landing_page <../ansible_playbooks/ubuntu_20.04/configs/riaf_landing_page>` will add a landing page to make the repository findable. The landing page is stored in the branch ``landing_page`` and available via fuse mount using [fuse_git_bare_fs]_ through [apache]_ as web interface.
+
+.. include:: ../ansible_playbooks/ubuntu_20.04/configs/riaf_landing_page
    :literal:
    :code: html
 
