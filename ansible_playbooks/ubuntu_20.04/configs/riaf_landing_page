@@ -81,10 +81,12 @@ if [ $isdabu = 0 ]; then
 fi
 
 # check if metadata are ok
-jsonschema -i "$tmpdira/.dabu.json" "$tmpdira/.dabu.schema" || dabuok=0 && dabuok=1
+jsonschema -i "$tmpdira/.dabu.json" "$tmpdira/.dabu.schema" ; dabunotOK=$?
 
-if [ $dabuok = 1 ]; then
+if [ $dabunotOK = 0 ]; then
     cp -p "$tmpdira/.dabu.json" "$tmpdira/.dabu.schema" "$tmpdirb"
+else
+    pydabuerror=$(pydabu check_data_bubble -dir "$tmpdira")
 fi
 
 # set git environment in repo
@@ -108,7 +110,7 @@ index="$tmpdira/index.html"
     echo '<body>'
     echo "<h1>$GL_REPO</h1>"
 } > "$index"
-if [ $dabuok = 1 ]; then
+if [ $dabunotOK = 0 ]; then
     cp -p "$tmpdirb/.dabu.json" "$tmpdira"
     (cd "$tmpdira" && git add .dabu.json)
     {
@@ -118,7 +120,8 @@ if [ $dabuok = 1 ]; then
 else
     {
 	echo "<h2>error</h2>"
-	echo '<p>meta data ".dabu.json" do not follow ".dabu.schema"</p>'
+	echo '<p>meta data ".dabu.json" do not follow ".dabu.schema":'
+	echo "<pre>$pydabuerror</pre></p>"
     } >> "$index"
 fi
 {
@@ -126,7 +129,7 @@ fi
     echo '</html>'
 } >> "$index"
 (cd "$tmpdira" && git add index.html)
-if [ $dabuok = 1 ]; then
+if [ $dabunotOK = 0 ]; then
     if [ $res == 0 ]; then
 	(cd "$tmpdira" && git commit -m "added landing page and .dabu.json")
     else
