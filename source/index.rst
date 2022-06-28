@@ -6,6 +6,8 @@
 Welcome to riaf's documentation!
 ================================
 
+source of riaf: https://gitlab.com/dlr-pa/riaf
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
@@ -16,10 +18,6 @@ Welcome to riaf's documentation!
    walkthrough
    ansible_playbooks
    some_scripts
-
-riaf documentation: https://riaf.pages.gitlab.dlr.de/riaf/
-
-source of riaf: https://gitlab.dlr.de/riaf/riaf
 
 
 Indices and tables
