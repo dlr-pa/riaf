@@ -107,7 +107,7 @@ The output could look like:
                 (__)\       )\/\
                     ||----w |
                     ||     ||
-    
+
     riaf_test_system     : ok=65   changed=62   unreachable=0    failed=0
 
 With this the following software is installed and configured:
