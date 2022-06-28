@@ -20,8 +20,7 @@ zfs data storage
 If you want to store the data on a zfs file system you should prepare ``/data``
 as a zfs file system and adapt it after :ref:`installation and configuration`.
 
-You can use the ansible playbook :ref:`play_install_zfs.yaml` to create
-``/data`` as a zfs file system pool in this repository, e. g.:
+You can use the ansible playbook :ref:`play_install_zfs.yaml` in this repository to create ``/data`` as a zfs file system pool, e. g.:
 
 .. code-block:: sh
 
@@ -154,7 +153,7 @@ The starting page :download:`index.html <../ansible_playbooks/ubuntu_20.04/confi
 server_timestamping
 ___________________
 
-The gitolite trigger :ref:`server_timestamping <script server_timestamping>` does gpg signed timestamping on pushes to the server. So this cryptographic signature represent the time the data reaches the server and later changes of the history is not possible without the private gpg key own and stored on the server. This timestamping is stored in the branch ``server_timestamping``.
+The gitolite trigger :ref:`server_timestamping <script server_timestamping>` does gpg signed timestamping on pushes to the server. So this cryptographic signature represents the time the data reaches the server and later changes of the history are not possible without the private gpg key owned by the server and stored on the server. This timestamping is stored in the branch ``server_timestamping``.
 
 riaf_landing_page
 _________________

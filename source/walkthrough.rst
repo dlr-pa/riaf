@@ -5,14 +5,14 @@ overview
 --------
 
 This is a walkthrough of the basic features of riaf using a
-temporarily development setup on riaf.playground.pa.dlr.de.
+temporary development setup on riaf.playground.pa.dlr.de.
 So, if you want to try/use riaf replace the server name accordingly.
-Or, riaf.playground.pa.dlr.de is just a name we use here.
+Or, riaf.playground.pa.dlr.de is just a placeholder we use here.
 
 All steps can be handled as a self service.
 
 Using the `web interface <https://riaf.playground.pa.dlr.de/>`__ you get a
-limit number of features.
+limited number of features.
 
 creating a repository to store data
 -----------------------------------
@@ -30,7 +30,7 @@ you can create a group.
 Go to `create group <https://riaf.playground.pa.dlr.de/www/?creategroup>`__
 and fill out the web form.
 
-You have to set the users which are owners, writers and/or readers.
+You have to set which users are owners, writers and/or readers.
 
 This maps to 3 authorization groups. The owner group is allowed to
 create, read and write repositories in this group. The reader group is
@@ -68,12 +68,12 @@ creating the repository), e. g.:
 accessing data
 --------------
 
-To access the data you can use `git <https://git-scm.com/>`__ by the
+To access the data you can use `git <https://git-scm.com/>`__ with the
 supported protocols ssh and https.
 
 For using ssh you need to store your public ssh key using the web form
 `manage ssh keys with sskm <https://riaf.playground.pa.dlr.de/www/?mngkey>`__,
-e. g. (the ssh key is shorten for readability):
+e. g. (the ssh key is shortened for readability):
 
 +-------------------------------------------------+-----------------------------------+
 | field                                           | content                           |
@@ -94,7 +94,7 @@ management <https://gitolite.com/gitolite/contrib/sskm.html>`__, e. g.:
 
     ssh -i .ssh/newkey git@riaf.playground.pa.dlr.de sskm confirm-add @my_new_key_to_access_riaf
 
-You can find the repositories you can access on the website `gitolite
+You can find the repositories you have access to on the website `gitolite
 command (info) <https://riaf.playground.pa.dlr.de/www/?info>`__, by using the
 command ``ssh git@riaf.playground.pa.dlr.de`` or by getting the output from
 `riaf.playground.pa.dlr.de/git/ <https://riaf.playground.pa.dlr.de/git/>`__.
@@ -112,7 +112,7 @@ g. cloning the repository ``bar`` in the group ``foo``:
 using dav
 ~~~~~~~~~
 
-You can access read-only the repositories by
+You can access the repositories read-only by
 `WebDAV <http://www.webdav.org/>`__ at
 `riaf.playground.pa.dlr.de/dav/ <https://riaf.playground.pa.dlr.de/dav/>`__ (e. g.
 using your favorite browser).
@@ -125,7 +125,7 @@ this mountpoint created for you by the GUI on the command line.
 
 On Linux systems you can also use the fuse filesystem
 `davfs2 <http://savannah.nongnu.org/projects/davfs2>`__. But you have to
-adapt ``/etc/fstab`` therefore.
+adapt ``/etc/fstab`` for this.
 
 Using windows you can mount it as well, e. g. using the Explorer go to
 ``\\riaf.playground.pa.dlr.de@SSL\dav\`` and browse the data.
@@ -135,7 +135,7 @@ In this way your scripts can access the data like a local file.
 server timestamping
 -------------------
 
-If you push data to the server, the server will do a gpg signed timestamping. So this cryptographic signature represent the time the data reaches the server and later changes of the history is not possible without the private gpg key own and stored on the server. This timestamping is stored in the branch ``server_timestamping``.
+If you push data to the server, the server will do a gpg signed timestamping. So this cryptographic signature represents the time the data reaches the server and later changes of the history are not possible without the private gpg key owned by the server and stored on the server. This timestamping is stored in the branch ``server_timestamping``.
 
 The following example shows the gpg signed timestamping done on the server:
 
@@ -196,7 +196,7 @@ adding large files
 
 Adding large files to a repository should not be done using
 `git <https://git-scm.com/>`__. Please use
-`git-annex <https://git-annex.branchable.com/>`__, e. g. adding a small
+`git-annex <https://git-annex.branchable.com/>`__, e. g. to add a small
 file ``small_a`` using git and a large file ``large_b`` using git-annex
 do:
 
@@ -239,7 +239,7 @@ getting large files
 -------------------
 
 Large files should not be stored directly in a git repository. Therefore
-we use\ `git-annex <https://git-annex.branchable.com/>`__ here. So
+we use `git-annex <https://git-annex.branchable.com/>`__ here. So
 getting a repository and see the metadata and then getting a large file
 could be done by:
 
