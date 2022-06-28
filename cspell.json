@@ -17,7 +17,8 @@
 	"walkthrough", "myone", "neykey", "gvfs", "Thunar", "davs",
 	"mountpoint", "somedate", "dabu", "htpasswd",
 	"newkey", "davfs", "somedata",
-	"timestamping"
+	"timestamping",
+	"literalinclude", "CEST", "EDDSA"
     ],
     // ignorePaths: a list of globs to specify which files are to be ignored.
     "ignorePaths": [

@@ -24,6 +24,7 @@ repos:
     rev: ''
     hooks:
     - id: rstcheck
+      additional_dependencies: [sphinx]
   - repo: https://github.com/streetsidesoftware/cspell-cli
     rev: v5.6.10
     hooks:
