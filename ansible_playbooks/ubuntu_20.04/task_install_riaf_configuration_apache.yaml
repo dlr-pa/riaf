@@ -1,6 +1,7 @@
 # https://docs.ansible.com/ansible/2.5/modules/copy_module.html
 # https://docs.ansible.com/ansible/2.5/modules/file_module.html
 # https://docs.ansible.com/ansible/2.5/modules/shell_module.html
+# https://docs.ansible.com/ansible/2.5/modules/replace_module.html
 
 # adapt apache
 - name: install ssl certificate
@@ -39,7 +40,7 @@
     group: "{{ gitolite_user }}"
     mode: 0750
     owner: "{{ gitolite_user }}"
-    path: /var/www/gitolite/dav
+    path: /var/www/gitolite/dabu
     state: directory
 - name: create /etc/apache2/gitolite.passwd
   file:
