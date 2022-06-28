@@ -11,96 +11,96 @@ play_install_zfs.yaml
 
 :download:`play_install_zfs.yaml <../ansible_playbooks/ubuntu_20.04/play_install_zfs.yaml>`
 
-.. include:: ../ansible_playbooks/ubuntu_20.04/play_install_zfs.yaml
-   :literal:
+.. literalinclude:: ../ansible_playbooks/ubuntu_20.04/play_install_zfs.yaml
+   :language: yaml
 
 It uses the task :download:`task_install_zfs.yaml <../ansible_playbooks/ubuntu_20.04/task_install_zfs.yaml>`:
 
-.. include:: ../ansible_playbooks/ubuntu_20.04/task_install_zfs.yaml
-   :literal:
+.. literalinclude:: ../ansible_playbooks/ubuntu_20.04/task_install_zfs.yaml
+   :language: yaml
 
 play_install_riaf.yaml
 ----------------------
 
 :download:`play_install_riaf.yaml <../ansible_playbooks/ubuntu_20.04/play_install_riaf.yaml>`
 
-.. include:: ../ansible_playbooks/ubuntu_20.04/play_install_riaf.yaml
-   :literal:
+.. literalinclude:: ../ansible_playbooks/ubuntu_20.04/play_install_riaf.yaml
+   :language: yaml
 
 It uses the following tasks and handler:
 
 :download:`task_install_riaf_packages.yaml <../ansible_playbooks/ubuntu_20.04/task_install_riaf_packages.yaml>`:
 
-.. include:: ../ansible_playbooks/ubuntu_20.04/task_install_riaf_packages.yaml
-   :literal:
+.. literalinclude:: ../ansible_playbooks/ubuntu_20.04/task_install_riaf_packages.yaml
+   :language: yaml
 
 :download:`task_install_riaf_configuration_gitolite.yaml <../ansible_playbooks/ubuntu_20.04/task_install_riaf_configuration_gitolite.yaml>`:
 
-.. include:: ../ansible_playbooks/ubuntu_20.04/task_install_riaf_configuration_gitolite.yaml
-   :literal:
+.. literalinclude:: ../ansible_playbooks/ubuntu_20.04/task_install_riaf_configuration_gitolite.yaml
+   :language: yaml
 
 :download:`task_install_riaf_configuration_sshd.yaml <../ansible_playbooks/ubuntu_20.04/task_install_riaf_configuration_sshd.yaml>`:
 
-.. include:: ../ansible_playbooks/ubuntu_20.04/task_install_riaf_configuration_sshd.yaml
-   :literal:
+.. literalinclude:: ../ansible_playbooks/ubuntu_20.04/task_install_riaf_configuration_sshd.yaml
+   :language: yaml
 
 :download:`task_install_riaf_fuse_git_bare_fs.yaml <../ansible_playbooks/ubuntu_20.04/task_install_riaf_fuse_git_bare_fs.yaml>`:
 
-.. include:: ../ansible_playbooks/ubuntu_20.04/task_install_riaf_fuse_git_bare_fs.yaml
-   :literal:
+.. literalinclude:: ../ansible_playbooks/ubuntu_20.04/task_install_riaf_fuse_git_bare_fs.yaml
+   :language: yaml
 
 :download:`task_install_riaf_enable_apache_modules.yaml <../ansible_playbooks/ubuntu_20.04/task_install_riaf_enable_apache_modules.yaml>`:
 
-.. include:: ../ansible_playbooks/ubuntu_20.04/task_install_riaf_enable_apache_modules.yaml
-   :literal:
+.. literalinclude:: ../ansible_playbooks/ubuntu_20.04/task_install_riaf_enable_apache_modules.yaml
+   :language: yaml
 
 :download:`task_install_riaf_configuration_apache.yaml <../ansible_playbooks/ubuntu_20.04/task_install_riaf_configuration_apache.yaml>`:
 
-.. include:: ../ansible_playbooks/ubuntu_20.04/task_install_riaf_configuration_apache.yaml
-   :literal:
+.. literalinclude:: ../ansible_playbooks/ubuntu_20.04/task_install_riaf_configuration_apache.yaml
+   :language: yaml
 
 :download:`task_install_riaf_configuration_apache_gitolite_1.yaml <../ansible_playbooks/ubuntu_20.04/task_install_riaf_configuration_apache_gitolite_1.yaml>`:
 
-.. include:: ../ansible_playbooks/ubuntu_20.04/task_install_riaf_configuration_apache_gitolite_1.yaml
-   :literal:
+.. literalinclude:: ../ansible_playbooks/ubuntu_20.04/task_install_riaf_configuration_apache_gitolite_1.yaml
+   :language: yaml
 
 :download:`task_install_riaf_gitolite_web_interface.yaml <../ansible_playbooks/ubuntu_20.04/task_install_riaf_gitolite_web_interface.yaml>`:
 
-.. include:: ../ansible_playbooks/ubuntu_20.04/task_install_riaf_gitolite_web_interface.yaml
-   :literal:
+.. literalinclude:: ../ansible_playbooks/ubuntu_20.04/task_install_riaf_gitolite_web_interface.yaml
+   :language: yaml
 
 :download:`task_install_riaf_configuration_gitolite_web_interface.yaml <../ansible_playbooks/ubuntu_20.04/task_install_riaf_configuration_gitolite_web_interface.yaml>`:
 
-.. include:: ../ansible_playbooks/ubuntu_20.04/task_install_riaf_configuration_gitolite_web_interface.yaml
-   :literal:
+.. literalinclude:: ../ansible_playbooks/ubuntu_20.04/task_install_riaf_configuration_gitolite_web_interface.yaml
+   :language: yaml
 
 :download:`task_install_riaf_configuration_apache_gitolite_2.yaml <../ansible_playbooks/ubuntu_20.04/task_install_riaf_configuration_apache_gitolite_2.yaml>`:
 
-.. include:: ../ansible_playbooks/ubuntu_20.04/task_install_riaf_configuration_apache_gitolite_2.yaml
-   :literal:
+.. literalinclude:: ../ansible_playbooks/ubuntu_20.04/task_install_riaf_configuration_apache_gitolite_2.yaml
+   :language: yaml
 
 :download:`task_install_riaf_gitolite_add_trigger_riaf_post_git.yaml <../ansible_playbooks/ubuntu_20.04/task_install_riaf_gitolite_add_trigger_riaf_post_git.yaml>`:
 
-.. include:: ../ansible_playbooks/ubuntu_20.04/task_install_riaf_gitolite_add_trigger_riaf_post_git.yaml
-   :literal:
+.. literalinclude:: ../ansible_playbooks/ubuntu_20.04/task_install_riaf_gitolite_add_trigger_riaf_post_git.yaml
+   :language: yaml
 
 :download:`handler_install_riaf.yaml <../ansible_playbooks/ubuntu_20.04/handler_install_riaf.yaml>`:
 
-.. include:: ../ansible_playbooks/ubuntu_20.04/handler_install_riaf.yaml
-   :literal:
+.. literalinclude:: ../ansible_playbooks/ubuntu_20.04/handler_install_riaf.yaml
+   :language: yaml
 
 play_gitolite_home2zfs_filesystem.yaml
 --------------------------------------
 
 :download:`play_gitolite_home2zfs_filesystem.yaml <../ansible_playbooks/ubuntu_20.04/play_gitolite_home2zfs_filesystem.yaml>`
 
-.. include:: ../ansible_playbooks/ubuntu_20.04/play_gitolite_home2zfs_filesystem.yaml
-   :literal:
+.. literalinclude:: ../ansible_playbooks/ubuntu_20.04/play_gitolite_home2zfs_filesystem.yaml
+   :language: yaml
 
 It uses the task :download:`task_gitolite_home2zfs_filesystem.yaml <../ansible_playbooks/ubuntu_20.04/task_gitolite_home2zfs_filesystem.yaml>`:
 
-.. include:: ../ansible_playbooks/ubuntu_20.04/task_gitolite_home2zfs_filesystem.yaml
-   :literal:
+.. literalinclude:: ../ansible_playbooks/ubuntu_20.04/task_gitolite_home2zfs_filesystem.yaml
+   :language: yaml
 
 play_add_user.yaml
 ------------------
@@ -108,15 +108,15 @@ play_add_user.yaml
 
 :download:`play_add_user.yaml <../ansible_playbooks/ubuntu_20.04/play_add_user.yaml>`
 
-.. include:: ../ansible_playbooks/ubuntu_20.04/play_add_user.yaml
-   :literal:
+.. literalinclude:: ../ansible_playbooks/ubuntu_20.04/play_add_user.yaml
+   :language: yaml
 
 It uses the following tasks and handler:
 
 :download:`task_riaf_add_user.yaml <../ansible_playbooks/ubuntu_20.04/task_riaf_add_user.yaml>`:
 
-.. include:: ../ansible_playbooks/ubuntu_20.04/task_riaf_add_user.yaml
-   :literal:
+.. literalinclude:: ../ansible_playbooks/ubuntu_20.04/task_riaf_add_user.yaml
+   :language: yaml
 
 
 play_update.yaml
@@ -124,14 +124,14 @@ play_update.yaml
 
 :download:`play_update.yaml <../ansible_playbooks/ubuntu_20.04/play_update.yaml>`
 
-.. include:: ../ansible_playbooks/ubuntu_20.04/play_update.yaml
-   :literal:
+.. literalinclude:: ../ansible_playbooks/ubuntu_20.04/play_update.yaml
+   :language: yaml
 
 It uses the following tasks and handler:
 
 :download:`task_update.yaml <../ansible_playbooks/ubuntu_20.04/task_update.yaml>`:
 
-.. include:: ../ansible_playbooks/ubuntu_20.04/task_update.yaml
-   :literal:
+.. literalinclude:: ../ansible_playbooks/ubuntu_20.04/task_update.yaml
+   :language: yaml
 
 :download:`task_install_riaf_fuse_git_bare_fs.yaml <../ansible_playbooks/ubuntu_20.04/task_install_riaf_fuse_git_bare_fs.yaml>`
