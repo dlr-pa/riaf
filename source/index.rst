@@ -6,6 +6,8 @@
 Welcome to riaf's documentation!
 ================================
 
+riaf documentation: https://dlr-pa.gitlab.io/riaf/
+
 source of riaf: https://gitlab.com/dlr-pa/riaf
 
 .. toctree::
