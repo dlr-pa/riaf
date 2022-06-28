@@ -7,7 +7,7 @@ Welcome to riaf's documentation!
 ================================
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    :caption: Contents:
 
    preamble
@@ -15,6 +15,7 @@ Welcome to riaf's documentation!
    user_management
    walkthrough
    ansible_playbooks
+   some_scripts
 
 riaf documentation: https://riaf.pages.gitlab.dlr.de/riaf/
 
