@@ -53,17 +53,17 @@ You will be asked for a few variables and the output could look like:
 
     Using ~/.ansible.cfg as config file
     initial ssh adminkey for gitolite: [skipped here]
-    gitolite user name [git]: 
-    path to the gitolite home directory (repositories are stored here) [/data/gitolite]: 
-    DNS name of the server [example.com]: 
-    config file of the gitolite web site [configs/gitolite.conf]: 
-    ssl certificate of the web site [cert/gitolite.crt]: 
-    ssl certificate key of the web site [cert/gitolite.key]: 
-    path to gitolite-suexec-wrapper.sh [configs/gitolite-suexec-wrapper.sh]: 
-    path to index.html [configs/index.html]: 
-    path to the script update_list_all_users [configs/update_list_all_users]: 
-    path to the server_timestamping script [configs/server_timestamping]: 
-    path to the riaf_landing_page script [configs/riaf_landing_page]: 
+    gitolite user name [git]:
+    path to the gitolite home directory (repositories are stored here) [/data/gitolite]:
+    DNS name of the server [example.com]:
+    config file of the gitolite web site [configs/gitolite.conf]:
+    ssl certificate of the web site [cert/gitolite.crt]:
+    ssl certificate key of the web site [cert/gitolite.key]:
+    path to gitolite-suexec-wrapper.sh [configs/gitolite-suexec-wrapper.sh]:
+    path to index.html [configs/index.html]:
+    path to the script update_list_all_users [configs/update_list_all_users]:
+    path to the server_timestamping script [configs/server_timestamping]:
+    path to the riaf_landing_page script [configs/riaf_landing_page]:
     ...
 
 Instead of giving them one by one you can also pass them as command line options, e. g.:
@@ -108,7 +108,7 @@ The output could look like:
                     ||----w |
                     ||     ||
     
-    riaf_test_system     : ok=65   changed=62   unreachable=0    failed=0   
+    riaf_test_system     : ok=65   changed=62   unreachable=0    failed=0
 
 With this the following software is installed and configured:
 

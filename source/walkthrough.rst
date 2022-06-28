@@ -182,13 +182,13 @@ The following example shows the gpg signed timestamping done on the server:
     gpg: Can't check signature: No public key
     Author: git <git@localhost>
     Date:   Tue Jun 28 14:53:20 2022 +0000
-    
+
         signing commit
-    
+
     commit ee2985fb06d83512b676937397cb7fcfb45ab03c (origin/master, master)
     Author: Daniel Mohr <daniel.mohr@dlr.de>
     Date:   Tue Jun 28 16:52:16 2022 +0200
-    
+
         a
 
 adding large files
