@@ -81,7 +81,10 @@ language = None
 exclude_patterns = []
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = 'sphinx'
+# choose one of: import pygments.styles; list(pygments.styles.get_all_styles())
+#pygments_style = 'sphinx'
+#pygments_style = 'emacs'
+pygments_style = 'xcode'
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = False
@@ -92,8 +95,13 @@ todo_include_todos = False
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'alabaster'
+# https://www.sphinx-doc.org/en/master/usage/theming.html
+#html_theme = 'alabaster'
 #html_theme = 'nature'
+#html_theme = 'classic'
+#html_theme = 'agogo'
+html_theme = 'pyramid'
+#html_theme = 'bizstyle'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -187,4 +195,4 @@ texinfo_documents = [
 
 
 # Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {'https://docs.python.org/': None}
+#intersphinx_mapping = {'https://docs.python.org/': None}
