@@ -1,0 +1,69 @@
+# https://docs.ansible.com/ansible/2.5/modules/file_module.html
+# https://docs.ansible.com/ansible/2.5/modules/copy_module.html
+# https://docs.ansible.com/ansible/2.5/modules/replace_module.html
+# https://docs.ansible.com/ansible/2.5/modules/cron_module.html
+# https://docs.ansible.com/ansible/2.5/modules/command_module.html
+
+- name: create bin directory in gitolite home
+  file:
+    group: "{{ gitolite_user }}"
+    mode: 0700
+    owner: "{{ gitolite_user }}"
+    path: "{{ gitolite_home }}/bin/"
+    state: directory
+- name: 'install update_list_all_users'
+  copy:
+    backup: yes
+    dest: '{{ gitolite_home }}/bin/update_list_all_users'
+    group: '{{ gitolite_user }}'
+    mode: 0700
+    owner: '{{ gitolite_user }}'
+    src: '{{ gitolite_update_list_all_users }}'
+  notify:
+    - reload apache2
+- name: 'adapt update_list_all_users'
+  replace:
+    backup: yes
+    path: '{{ gitolite_home }}/bin/update_list_all_users'
+    regexp: '/data/gitolite/dav_users'
+    replace: '{{ gitolite_home }}/dav_users'
+- name: add update_list_all_users to crontab 1/4
+  cron:
+    backup: yes
+    env: yes
+    name: SHELL
+    value: /bin/sh
+    user: '{{ gitolite_user }}'
+- name: add update_list_all_users to crontab 2/4
+  cron:
+    backup: yes
+    env: yes
+    insertafter: SHELL
+    name: PATH
+    value: '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/snap/bin:{{ gitolite_home }}/bin'
+    user: '{{ gitolite_user }}'
+- name: add update_list_all_users to crontab 3/4
+  cron:
+    backup: yes
+    env: yes
+    insertafter: PATH
+    name: HOME
+    value: '{{ gitolite_home }}'
+    user: '{{ gitolite_user }}'
+- name: add update_list_all_users to crontab 4/4
+  cron:
+    backup: yes
+    day: '*'
+    hour: '*'
+    job: update_list_all_users
+    minute: 23
+    name: update list of all users
+    state: present
+    user: '{{ gitolite_user }}'
+- name: run update_list_all_users once now
+  command: '{{ gitolite_home }}/bin/update_list_all_users'
+  args:
+    creates: '{{ gitolite_home }}/dav_users'
+  become: true
+  become_method: sudo
+  become_user: '{{ gitolite_user }}'
