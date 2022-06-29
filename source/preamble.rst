@@ -34,7 +34,7 @@ For this purpose we use open source software in a composability design
   References
   __________
 
-.. [FAIR] https://www.go-fair.org/fair-principles/
+.. [FAIR] https://www.go-fair.org/fair-principles/ https://oceanrep.geomar.de/id/eprint/55269/
 .. [gitolite] https://gitolite.com/gitolite/
 .. [fuse_git_bare_fs] https://dlr-pa.github.io/fuse_git_bare_fs/
 .. [sskm] https://gitolite.com/gitolite/contrib/sskm
