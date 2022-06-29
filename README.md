@@ -1,6 +1,6 @@
 # riaf -- a Repository Infrastructure that Accommodates Files
 
-riaf is LR repository infrastructure to accommodate files.
+riaf is a repository infrastructure to accommodate files.
 
 [riaf documentation](https://dlr-pa.gitlab.io/riaf/)
 
