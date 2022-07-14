@@ -20,6 +20,7 @@ source of riaf: https://gitlab.com/dlr-pa/riaf
    walkthrough
    ansible_playbooks
    some_scripts
+   creative_commons_attribution_share_alike_international
 
 
 Indices and tables
