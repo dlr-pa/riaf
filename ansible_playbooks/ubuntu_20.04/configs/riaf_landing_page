@@ -17,6 +17,10 @@
 # run trigger from gitolite account command line:
 # GL_LOGFILE="$HOME/.gitolite/logs/gitolite-2022-06.log" GL_REPO_BASE="$HOME/repositories" GL_REPO="foo/foo" /usr/share/gitolite3/triggers/riaf_landing_page POST_GIT foo/foo testuser W any git-receive-pack
 
+# we should use jq to extract values from .dabu.json and
+# present on landing page (e. g. author, license, ...)
+# https://stedolan.github.io/jq/manual/
+
 #set -e
 
 runtime=$(date +%Y-%m-%d.%H:%M:%S)
