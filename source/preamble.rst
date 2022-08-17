@@ -1,7 +1,7 @@
 riaf -- a Repository Infrastructure that Accommodates Files
 -----------------------------------------------------------
 
-riaf is a repository infrastructure to accommodate files.
+[riaf]_ is a repository infrastructure to accommodate files.
 It enables to hold the data with the [FAIR]_ principles.
 
 riaf is designed to enable provenance and reproducibility of the research data
@@ -9,6 +9,22 @@ in the early part of the data life cycle, i. e. prior to publication.
 It further is designed to enable checks on metadata relevant to research data
 management as defined e.g. in a
 machine actionable data management plan (maDMP).
+
+This new concept of using CI pipelines for research data allows interesting
+features.
+The server could do cryptographic timestamping to inhibit silent changes of
+the history.
+Research data management can define relevant checks on metadata.
+From given metadata a public accessible landing page can be created.
+
+In our concept most data is stored in a repository and can be easily
+distributed. This allows the data genesis in a private environment
+(e. g. aircraft, campaigns, ...) without network access and
+share later the data using a central server instance.
+Also already during data genesis (e. g. raw data, physical data,
+scientific data) the possibility to share data and track changes is given.
+And in the end after preparing a publication the data can be transported
+to a public data repository.
 
 The primary focus is to work as an in-house solution to handle digital assets.
 It should be possible to use the data without downloading a complete digital
@@ -34,6 +50,7 @@ For this purpose we use open source software in a composability design
   References
   __________
 
+.. [riaf] https://dlr-pa.gitlab.io/riaf/
 .. [FAIR] https://www.go-fair.org/fair-principles/ https://oceanrep.geomar.de/id/eprint/55269/
 .. [gitolite] https://gitolite.com/gitolite/
 .. [fuse_git_bare_fs] https://dlr-pa.github.io/fuse_git_bare_fs/
