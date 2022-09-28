@@ -47,8 +47,8 @@ For this purpose we use open source software in a composability design
 Talks, Publications
 ___________________
 
-  * 2021-04-20 [RDA 17th Plenary Meeting]_
-  * 2022-10-06 [HMC Conference 2022]_
+  * [2021-04-20]_ RDA 17th Plenary Meeting
+  * [2022-10-06]_ HMC Conference 2022
 
 .. only:: html
 
@@ -67,5 +67,5 @@ ___________________
 .. [git-annex] https://git-annex.branchable.com
 .. [OpenSSH] https://www.openssh.com/
 .. [apache] https://httpd.apache.org/
-.. [RDA 17th Plenary Meeting] https://www.rd-alliance.org/plenaries/rda-17th-plenary-meeting-edinburgh-virtual/experiments-preparing-data-interchange-and https://elib.dlr.de/142055/ https://www.youtube.com/watch?v=D7RchXvADNk
-.. [HMC Conference 2022] https://events.hifis.net/event/469/ https://events.hifis.net/event/469/contributions/3208/
+.. [2021-04-20] https://www.rd-alliance.org/plenaries/rda-17th-plenary-meeting-edinburgh-virtual/experiments-preparing-data-interchange-and https://elib.dlr.de/142055/ https://www.youtube.com/watch?v=D7RchXvADNk
+.. [2022-10-06] https://events.hifis.net/event/469/ https://events.hifis.net/event/469/contributions/3208/
