@@ -1,10 +1,10 @@
-riaf -- a Repository Infrastructure that Accommodates Files
+RIAF -- a Repository Infrastructure that Accommodates Files
 -----------------------------------------------------------
 
-[riaf]_ is a repository infrastructure to accommodate files.
+[RIAF]_ is a repository infrastructure to accommodate files.
 It enables to hold the data with the [FAIR]_ principles.
 
-riaf is designed to enable provenance and reproducibility of the research data
+RIAF is designed to enable provenance and reproducibility of the research data
 in the early part of the data life cycle, i. e. prior to publication.
 It further is designed to enable checks on metadata relevant to research data
 management as defined e.g. in a
@@ -20,7 +20,7 @@ From given metadata a public accessible landing page can be created.
 In our concept most data is stored in a repository and can be easily
 distributed. This allows the data genesis in a private environment
 (e. g. aircraft, campaigns, ...) without network access and
-share later the data using a central server instance.
+later share the data using a central server instance.
 Also already during data genesis (e. g. raw data, physical data,
 scientific data) the possibility to share data and track changes is given.
 And in the end after preparing a publication the data can be transported
@@ -44,13 +44,18 @@ For this purpose we use open source software in a composability design
   * [OpenSSH]_
   * [apache]_
 
+Talks, Publications
+___________________
+
+  * 2021-04-20 [RDA 17th Plenary Meeting]_
+  * 2022-10-06 [HMC Conference 2022]_
 
 .. only:: html
 
   References
   __________
 
-.. [riaf] https://dlr-pa.gitlab.io/riaf/
+.. [RIAF] https://dlr-pa.gitlab.io/riaf/
 .. [FAIR] https://www.go-fair.org/fair-principles/ https://oceanrep.geomar.de/id/eprint/55269/
 .. [gitolite] https://gitolite.com/gitolite/
 .. [fuse_git_bare_fs] https://dlr-pa.github.io/fuse_git_bare_fs/
@@ -62,3 +67,5 @@ For this purpose we use open source software in a composability design
 .. [git-annex] https://git-annex.branchable.com
 .. [OpenSSH] https://www.openssh.com/
 .. [apache] https://httpd.apache.org/
+.. [RDA 17th Plenary Meeting] https://www.rd-alliance.org/plenaries/rda-17th-plenary-meeting-edinburgh-virtual/experiments-preparing-data-interchange-and https://elib.dlr.de/142055/ https://www.youtube.com/watch?v=D7RchXvADNk
+.. [HMC Conference 2022] https://events.hifis.net/event/469/ https://events.hifis.net/event/469/contributions/3208/
