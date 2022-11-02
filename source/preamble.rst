@@ -49,7 +49,7 @@ For this purpose we use open source software in a composability design
   References
   __________
 
-.. [RIAF] https://dlr-pa.gitlab.io/riaf/
+.. [RIAF] https://riaf-data.org/
 .. [FAIR] https://www.go-fair.org/fair-principles/ https://oceanrep.geomar.de/id/eprint/55269/
 .. [gitolite] https://gitolite.com/gitolite/
 .. [fuse_git_bare_fs] https://dlr-pa.github.io/fuse_git_bare_fs/
@@ -69,4 +69,4 @@ ___________________
   * [2022-10-06]_ HMC Conference 2022
 
 .. [2021-04-20] https://www.rd-alliance.org/plenaries/rda-17th-plenary-meeting-edinburgh-virtual/experiments-preparing-data-interchange-and https://elib.dlr.de/142055/ https://www.youtube.com/watch?v=D7RchXvADNk
-.. [2022-10-06] https://events.hifis.net/event/469/ https://events.hifis.net/event/469/contributions/3208/
+.. [2022-10-06] https://doi.org/10.5281/zenodo.7189121 https://events.hifis.net/event/469/contributions/3208/
