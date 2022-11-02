@@ -85,7 +85,7 @@ pages:
 deploy_to_github:
   stage: deploy
   rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_SERVER_HOST == "gitlab.com"
   image:
     # https://hub.docker.com/_/alpine
     name: alpine:latest
