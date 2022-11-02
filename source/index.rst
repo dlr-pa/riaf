@@ -6,7 +6,7 @@
 Welcome to riaf's documentation!
 ================================
 
-riaf documentation: https://dlr-pa.gitlab.io/riaf/
+riaf documentation: https://riaf-data.org/
 
 source of riaf: https://gitlab.com/dlr-pa/riaf
 
